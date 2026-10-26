@@ -1,0 +1,578 @@
+--- v1.1-pending/01_PRODUCT_VISION_AND_SCOPE.md
++++ v1.1-approved/01_PRODUCT_VISION_AND_SCOPE.md
+@@ -1,21 +1,23 @@
+ # 01｜Product Vision and Scope
+ 
+-**Status: Specification Baseline v1.1 — Home Information Enhancement**  
++**Status: Specification Baseline v1.1 — Approved for UI/UX Design**  
+ **規格日期：2026-10-25｜版本：v1.1｜產品測試狀態：Not Run**
+ 
+ ## v1.1 受控變更與核准界線
+ 
+-**審核狀態：Approved Change Request — Draft Pending v1.1 Final User Review**
++**審核狀態：Approved Product Requirements / Approved Behavioral Baseline**
+ 
+ - **D8 已核准的變更範圍**：採 Google Stitch 第一張「首頁 A」為正式視覺方向；首頁保留本機時間、日期與星期、Wi-Fi／網路、HDMI、本機儲存五項唯讀資訊，不新增焦點或操作。
+ - **既有已核准基線**：F01～F08 的 AC 與原 85 個 Active Scenario 行為不變；SA-01～SA-07 與 Q1～Q5 Closed 保留。D4 僅「時鐘／資訊排除」由 D8 修訂，其餘限制不變。
+-- **待最終審核**：v1.1 整份文件、F11 AC／BDD 細化及 P11-01～P11-03 建議細節尚待審核；D8 已核准不等於所有衍生規則已核准。
++- **Approved Product Requirements**：D1～D8 與 v1.1 MVP AC／BDD 已核准；F11 維持 Must Have。
++- **Approved Behavioral Baseline**：SA-01～SA-07 保留；P11-01～P11-03 全部 Approved／Closed。所有效能數字仍是初始驗收目標，需實機測量。
++- **Pending Final UI/UX Design Review**：首頁 A 方向已選定，不表示完整 UI/UX 已驗收；最終畫面、焦點及錯誤／降級狀態對齊仍待審核。
+ - **設計證據**：首頁 A 選擇依本次使用者陳述記錄；本次未操作 Stitch 或檢視其圖稿，未取得可鎖版的畫面 ID／匯出版本，不能據此宣稱全部畫面、焦點及錯誤狀態設計已核准。
+ - **Pending Technical Verification / Product Tests: Not Run**：一般 APK 可讀資訊及 Xiaomi 真實行為均待驗證；受控 fixture 不是裝置證據。手動啟動及獨立 G-HOME 不變。
+ 
+ ### Change Log — v1.0 → v1.1
+ 
+-F11 由 Should 升為 Must「本機時間與唯讀裝置資訊」；修訂 AC-F11-01，追加 F11 AC 及從 SC-095 起的新情境。F01 只補資訊顯示範圍，工具仍恰為重新整理／系統設定。F11 不加入 F06 的 App 清單查詢或焦點狀態；資訊失敗只在本欄降級。詳細 ID 與計數見 04。以下 v1.0 及更早的核准／Change Log 只記錄當時狀態，不代表 v1.1 已最終核准。
++F11 由 Should 升為 Must「本機時間與唯讀裝置資訊」；修訂 AC-F11-01，追加 F11 AC 及從 SC-095 起的新情境。F01 只補資訊顯示範圍，工具仍恰為重新整理／系統設定。F11 不加入 F06 的 App 清單查詢或焦點狀態；資訊失敗只在本欄降級。詳細 ID 與計數見 04。本次定稿只更新核准狀態，不修改行為、數值或 ID。以下 v1.0 及更早的核准／Change Log 保留當時狀態；現行核准狀態以本節為準，不代表技術或設計驗收通過。
+ 
+ ## 歷史核准紀錄（Draft 0.2 → v1.0）
+ 
+@@ -46,7 +48,7 @@
+ 
+ ## 文件範圍與權威
+ 
+-01 為基線與決策；02 為目前有效 Feature／AC／行為契約；03 只含 Active Gherkin；04 為現行與歷史 ID 追溯、覆蓋與靜態檢查；05 為已關閉產品決策、待驗證技術 Gate 與風險。舊版行為只保留在 04 的明示歷史對照，不再當作現行要求。所有文件版本統一為 Specification Baseline v1.1 — Home Information Enhancement；已核准變更的文件草案等待 v1.1 最終審核。
++01 為基線與決策；02 為目前有效 Feature／AC／行為契約；03 只含 Active Gherkin；04 為現行與歷史 ID 追溯、覆蓋與靜態檢查；05 為已關閉產品決策、待驗證技術 Gate 與風險。舊版行為只保留在 04 的明示歷史對照，不再當作現行要求。所有文件版本統一為 Specification Baseline v1.1 — Approved for UI/UX Design；產品需求與行為基線已核准，完整 UI/UX 最終驗收仍 Pending。
+ 
+ ## Approved Product Requirements（D1～D8；D8 為本次核准變更）
+ 
+@@ -61,7 +63,7 @@
+ | D5 | 保留 F07／F08 的公開設定入口與錯誤降級；HDMI 走原廠，不直接切換 | F07、F08、F13 |
+ | D6 | 更多 APP 使用覆蓋式面板，不是獨立頁或首頁下方展開；不要求系統 Overlay 權限；排除指定服務重複入口 | F02–F06、AC-F08-04 |
+ | D7 | 指定 App 無合格可啟動入口則隱藏、壓縮、不替補、不導商店；三者全缺仍保留更多 APP 與兩個工具 | F02、F03、F06 |
+-| D8 — Approved Change Request | 採第一張「首頁 A」視覺方向；保留時間、日期與星期、Wi-Fi／網路、HDMI、本機儲存五項唯讀資訊；不增加焦點、設定或輸入源切換功能 | F01 顯示範圍；F11 Must；細化 AC／BDD 待 v1.1 最終審核 |
++| D8 — Approved Product Requirements | 採第一張「首頁 A」視覺方向；保留時間、日期與星期、Wi-Fi／網路、HDMI、本機儲存五項唯讀資訊；不增加焦點、設定或輸入源切換功能 | F01 顯示範圍；F11 Must；細化 AC／BDD 已核准；完整 UI/UX 待最終驗收 |
+ 
+ ## 基線與知識分類
+ 
+@@ -118,7 +120,7 @@
+ | F08 | 實機相容性、非破壞性與可移除性 | Must Have | MVP；Approved Product Requirements／Approved Behavioral Baseline |
+ | F09 | 收藏常用 App | Should Have | 不納入本次 MVP |
+ | F10 | 手動排序 | Could Have | 不納入本次 MVP |
+-| F11 | 本機時間與唯讀裝置資訊 | Must Have | D8 範圍已核准；細化草案待 v1.1 最終審核 |
++| F11 | 本機時間與唯讀裝置資訊 | Must Have | D8／F11 需求與行為已核准；技術能力仍待驗證 |
+ | F12 | 可更換背景 | Could Have | 不納入本次 MVP |
+ | F13 | HDMI／輸入源直達 | Could Have | 不納入本次 MVP |
+ | F14 | 手機 App 與進階 App 管理 | Won't Have | 不納入本次 MVP |
+@@ -129,10 +131,10 @@
+ 
+ ## 完成定義與停止條件
+ 
+-本次完成指五份原檔更新為 Specification Baseline v1.1 待審草案、Change Log 與舊／新 ID 追溯完整、全部現行 Must AC 有 Scenario、計數重新計算且靜態檢查通過；**不代表產品測試通過**。
++本次完成指五份原檔更新為 Specification Baseline v1.1 已核准需求基線、Change Log 與舊／新 ID 追溯完整、全部現行 Must AC 有 Scenario、計數重新計算且靜態檢查通過；**不代表產品測試通過**。
+ 
+-v1.0 基線及 D8 範圍已核准；未來 MVP 完成仍須 v1.1 最終審核及完整設計獲批准、TDD／程式審查及 G1–G7 各自證據，模擬器不代替 Xiaomi API 30 armeabi-v7a。指定服務身分映射與多入口選擇須完成 G3；未裝指定 App 是支援分支，mapping 未確認或漏查不是成功分支。F07 的明示降級已由 D5 接受，但仍須驗證降級行為，不可記為直接設定成功。
++v1.1 需求與行為基線已核准；未來 MVP 完成仍須完整設計獲批准、TDD／程式審查及 G1–G7 各自證據，模擬器不代替 Xiaomi API 30 armeabi-v7a。指定服務身分映射與多入口選擇須完成 G3；未裝指定 App 是支援分支，mapping 未確認或漏查不是成功分支。F07 的明示降級已由 D5 接受，但仍須驗證降級行為，不可記為直接設定成功。
+ 
+ G-HOME 不阻擋手動 MVP；所有系統變更仍另行批准。無原廠入口、實機 ABI 失敗、焦點陷阱、誤啟動背景首頁、原廠功能回歸或無法 rollback 都阻擋發布，不得用 root／停用原廠套件繞過。
+ 
+-完成本次修訂後停止，等待米勒審核 v1.1；不進 Stitch、程式開發、產品測試或任何裝置操作。
++完成本次修訂後停止，等待米勒下一步指示；不進 Stitch、程式開發、產品測試或任何裝置操作。
+--- v1.1-pending/02_MVP_FEATURE_SPEC.md
++++ v1.1-approved/02_MVP_FEATURE_SPEC.md
+@@ -1,21 +1,23 @@
+ # 02｜MVP Feature Specification
+ 
+-**Status: Specification Baseline v1.1 — Home Information Enhancement**  
++**Status: Specification Baseline v1.1 — Approved for UI/UX Design**  
+ **規格日期：2026-10-25｜版本：v1.1｜產品測試狀態：Not Run**
+ 
+ ## v1.1 受控變更與核准界線
+ 
+-**審核狀態：Approved Change Request — Draft Pending v1.1 Final User Review**
++**審核狀態：Approved Product Requirements / Approved Behavioral Baseline**
+ 
+ - **D8 已核准的變更範圍**：採 Google Stitch 第一張「首頁 A」為正式視覺方向；首頁保留本機時間、日期與星期、Wi-Fi／網路、HDMI、本機儲存五項唯讀資訊，不新增焦點或操作。
+ - **既有已核准基線**：F01～F08 的 AC 與原 85 個 Active Scenario 行為不變；SA-01～SA-07 與 Q1～Q5 Closed 保留。D4 僅「時鐘／資訊排除」由 D8 修訂，其餘限制不變。
+-- **待最終審核**：v1.1 整份文件、F11 AC／BDD 細化及 P11-01～P11-03 建議細節尚待審核；D8 已核准不等於所有衍生規則已核准。
++- **Approved Product Requirements**：D1～D8 與 v1.1 MVP AC／BDD 已核准；F11 維持 Must Have。
++- **Approved Behavioral Baseline**：SA-01～SA-07 保留；P11-01～P11-03 全部 Approved／Closed。所有效能數字仍是初始驗收目標，需實機測量。
++- **Pending Final UI/UX Design Review**：首頁 A 方向已選定，不表示完整 UI/UX 已驗收；最終畫面、焦點及錯誤／降級狀態對齊仍待審核。
+ - **設計證據**：首頁 A 選擇依本次使用者陳述記錄；本次未操作 Stitch 或檢視其圖稿，未取得可鎖版的畫面 ID／匯出版本，不能據此宣稱全部畫面、焦點及錯誤狀態設計已核准。
+ - **Pending Technical Verification / Product Tests: Not Run**：一般 APK 可讀資訊及 Xiaomi 真實行為均待驗證；受控 fixture 不是裝置證據。手動啟動及獨立 G-HOME 不變。
+ 
+ ### Change Log — v1.0 → v1.1
+ 
+-F11 由 Should 升為 Must「本機時間與唯讀裝置資訊」；修訂 AC-F11-01，追加 F11 AC 及從 SC-095 起的新情境。F01 只補資訊顯示範圍，工具仍恰為重新整理／系統設定。F11 不加入 F06 的 App 清單查詢或焦點狀態；資訊失敗只在本欄降級。詳細 ID 與計數見 04。以下 v1.0 及更早的核准／Change Log 只記錄當時狀態，不代表 v1.1 已最終核准。
++F11 由 Should 升為 Must「本機時間與唯讀裝置資訊」；修訂 AC-F11-01，追加 F11 AC 及從 SC-095 起的新情境。F01 只補資訊顯示範圍，工具仍恰為重新整理／系統設定。F11 不加入 F06 的 App 清單查詢或焦點狀態；資訊失敗只在本欄降級。詳細 ID 與計數見 04。本次定稿只更新核准狀態，不修改行為、數值或 ID。以下 v1.0 及更早的核准／Change Log 保留當時狀態；現行核准狀態以本節為準，不代表技術或設計驗收通過。
+ 
+ ## 歷史核准紀錄（Draft 0.2 → v1.0）
+ 
+@@ -38,7 +40,7 @@
+ 
+ ## 規範狀態
+ 
+-Feature ID F01–F16 延續。D1–D7 與 F01～F08 的既有 MVP AC 為 Approved Product Requirements；D8 範圍已核准，F11 細化 AC／BDD 為待審草案；SA-01～SA-07 為 Approved Behavioral Baseline。實際 mapping 與技術能力仍 Pending Technical Verification，不得把產品核准當成實機事實。舊 AC 同責任保留 ID 並標 Modified，新增 AC 追加編號；舊文字與變更關係見 04。
++Feature ID F01–F16 延續。D1–D7 與 F01～F08 的既有 MVP AC 為 Approved Product Requirements；D8 與 F11 細化 AC／BDD 已核准；SA-01～SA-07 為 Approved Behavioral Baseline。實際 mapping 與技術能力仍 Pending Technical Verification，不得把產品核准當成實機事實。舊 AC 同責任保留 ID 並標 Modified，新增 AC 追加編號；舊文字與變更關係見 04。
+ 
+ | Feature ID | 功能 | 本版 MoSCoW | 範圍／優先序 |
+ |---|---|---|---|
+@@ -52,7 +54,7 @@
+ | F08 | 實機相容性、非破壞性與可移除性 | Must Have | MVP；Approved Product Requirements／Approved Behavioral Baseline |
+ | F09 | 收藏常用 App | Should Have | 不納入本次 MVP |
+ | F10 | 手動排序 | Could Have | 不納入本次 MVP |
+-| F11 | 本機時間與唯讀裝置資訊 | Must Have | D8 範圍已核准；細化草案待 v1.1 最終審核 |
++| F11 | 本機時間與唯讀裝置資訊 | Must Have | D8／F11 需求與行為已核准；技術能力仍待驗證 |
+ | F12 | 可更換背景 | Could Have | 不納入本次 MVP |
+ | F13 | HDMI／輸入源直達 | Could Have | 不納入本次 MVP |
+ | F14 | 手機 App 與進階 App 管理 | Won't Have | 不納入本次 MVP |
+@@ -313,37 +315,37 @@
+ - **User Story：** 身為家庭觀看者，我要在首頁查看時間、日期及裝置資訊，而不打斷遙控選 App 或誤入設定。
+ - **功能描述：** D8 將五項唯讀資訊納入 MVP；不新增首頁工具或面板控制項。
+ - **行為規則：** 遵循下列資料契約；保持 F01～F08 的離線、焦點、返回、App 查詢與安全行為。資訊是既有「狀態訊息」的擴充，不是推薦、操作入口或網路服務。
+-- **相依性：** D8；F01、F03、F05、F08；G1、G4、G6、G7；P11-01～P11-03 細化待審。
++- **相依性：** D8；F01、F03、F05、F08；G1、G4、G6、G7；P11-01～P11-03 Approved／Closed。
+ - **技術風險：** 一般 APK 能讀到的欄位、來源可信度、隱私遮蔽、OEM／API 差異與前景更新負載均未驗證；資料不可用必須明示而非升權。
+-- **分類／驗證：** D8 與 F11 納入範圍已核准；本節細化／AC／BDD 為 Draft Pending v1.1 Final User Review；技術 Pending Technical Verification；產品測試 Not Run。
+-
+-| Acceptance Criteria | v1.1 可驗收條件草案（均追溯 D8） |
+-|---|---|
+-| AC-F11-01 | 時間、日期與星期均由同一次本機系統時間／時區快照及系統 locale、日期格式、12/24 小時設定產生；不顯示秒。系統格式／時區／日期改變後更新，無網路校時、不改系統時間；未取得可用快照時顯示未知或不可用，不顯示設計稿時間。更新預算依待審 P11-01。 |
++- **分類／驗證：** D8 與 F11 本節細化／AC／BDD 為 Approved Product Requirements／Approved Behavioral Baseline；技術 Pending Technical Verification；產品測試 Not Run。
++
++| Acceptance Criteria | v1.1 已核准可驗收條件（均追溯 D8） |
++|---|---|
++| AC-F11-01 | 時間、日期與星期均由同一次本機系統時間／時區快照及系統 locale、日期格式、12/24 小時設定產生；不顯示秒。系統格式／時區／日期改變後更新，無網路校時、不改系統時間；未取得可用快照時顯示未知或不可用，不顯示設計稿時間。更新預算依已核准 P11-01。 |
+ | AC-F11-02 | Wi-Fi／網路欄只呈現可靠來源確認的目前預設網路類型及連接狀態；可安全取得 Wi-Fi 名稱才顯示，否則明示名稱無法取得。未連線僅由成功來源確認；未知、權限不足、查詢失敗不能顯示為未連線，也不能以 Wi-Fi 已連線推論網際網路可用；不掃描、不探測外網、不要求敏感權限。 |
+ | AC-F11-03 | HDMI 欄呈現可靠來源確認的連接埠識別及連接狀態，欄位標示「HDMI 連接狀態」；連接不等於目前選用輸入、訊號或播放。來源只覆蓋部分埠時標示部分資訊；空集合但完整性未確認屬未知。不能安全可靠讀取時保留欄位並顯示無法取得；不得猜 HDMI 編號或切換輸入。 |
+-| AC-F11-04 | 儲存欄明示「本機資料磁碟（Launcher 所在）」，只呈現同一快照的可用容量與總容量，依待審 P11-03 使用十進位 GB（1 GB = 1,000,000,000 bytes），四捨五入一位小數；非零且不足 0.1 GB 顯示「<0.1 GB」。不合計 USB／NAS／其他磁碟，不稱硬體標稱容量或本 App 配額；總量須大於零、可用量介於零與總量，無效或存取失敗依資訊狀態契約降級。 |
++| AC-F11-04 | 儲存欄明示「本機資料磁碟（Launcher 所在）」，只呈現同一快照的可用容量與總容量，依已核准 P11-03 使用十進位 GB（1 GB = 1,000,000,000 bytes），四捨五入一位小數；非零且不足 0.1 GB 顯示「<0.1 GB」。不合計 USB／NAS／其他磁碟，不稱硬體標稱容量或本 App 配額；總量須大於零、可用量介於零與總量，無效或存取失敗依資訊狀態契約降級。 |
+ | AC-F11-05 | 首頁五項資訊在正常、未知及不可用狀態都保留其標籤，皆非可聚焦／可啟用項；不新增 D-pad 節點。針對資訊區的啟用事件不得開設定、啟動 App、改網路／輸入源或觸發權限要求；D-pad、OK、Back、HOME 原契約不變。 |
+ | AC-F11-06 | 資訊成功、失敗、逾時及重試更新都不改 H/O 快照、目前 Home／Panel 層、App stable key 或工具／關閉控制項焦點；不自動開關面板、捲動 App 或取得第二焦點。資訊查詢獨立於 F06，不等待資訊即可開啟更多 APP、重新整理或系統設定。 |
+ | AC-F11-07 | 每個資訊欄位分別區分正常、未知、不可用，依下列狀態契約顯示；失效舊值不冒充最新值、過期回應不覆蓋新結果。正式執行值必須來自本機真實可讀資料；無資料不以固定範例、Mock、設計稿或上次已失效值補值。一般 APK 無安全可靠來源時以明示降級滿足資訊欄存在與可操作性要求，不要求敏感／特權權限；Mock 結果不證明實機能力。 |
+ 
+-#### F11 資訊資料契約（v1.1 待審細化）
+-
+-以下是 D8 的建議驗收細化，不是已實機驗證的 API 能力；不指定 Kotlin class、UI framework 或私有元件。正式資料只讀本機系統，不做網路連線探測，不讀其他 App 私有資料，不加入裝置管理、設定捷徑、儲存清理或 HDMI 切換。一般非敏感權限如有必要仍須未來 Manifest 審查；本次不新增或請求任何權限，若需敏感／特權權限則降級。
++#### F11 資訊資料契約（v1.1 已核准行為基線）
++
++以下是 D8 已核准的驗收細化，不是已實機驗證的 API 能力；不指定 Kotlin class、UI framework 或私有元件。正式資料只讀本機系統，不做網路連線探測，不讀其他 App 私有資料，不加入裝置管理、設定捷徑、儲存清理或 HDMI 切換。一般非敏感權限如有必要仍須未來 Manifest 審查；本次不新增或請求任何權限，若需敏感／特權權限則降級。
+ 
+ | 狀態 | 判定 | 畫面（每個欄位獨立） |
+ |---|---|---|
+ | 正常 Available | 本次有效來源有值、範圍及語意已確認且未失效 | 只顯示已確認值；已確認未連線／未連接是正常的否定值，不是查詢錯誤 |
+ | 未知 Unknown | 初始／重新查詢尚未完成；資料空白、被遮蔽、無法判定或來源覆蓋不明 | 「狀態未知」；時間／日期可用「時間未知」「日期未知」；不填入零容量、假 SSID、預設 HDMI 或固定時間 |
+-| 不可用 Unavailable | 來源不支援、存取被拒、明確失敗、無效容量或超過待審期限 | 「無法取得（原因）」；原因限不支援／權限不足／讀取失敗／資料無效／逾時，不要求授權或開設定 |
++| 不可用 Unavailable | 來源不支援、存取被拒、明確失敗、無效容量或超過已核准的初始驗收期限 | 「無法取得（原因）」；原因限不支援／權限不足／讀取失敗／資料無效／逾時，不要求授權或開設定 |
+ 
+ - 五個可識別資訊項為「時間」「日期與星期」「Wi-Fi／網路」「HDMI 連接狀態」「本機儲存」。子欄位可部分成功：網路已確認 Wi-Fi 連線但名稱被遮蔽，顯示連線狀態並明示「名稱無法取得」；未知子欄位不能推翻已知連線事實。
+-- P11-02 建議最小內容：網路只讀目前預設網路（Wi-Fi／乙太網路／其他／無預設網路）；不顯示 IP、MAC、訊號強度、網速或宣稱 Internet 可用。SSID 僅已有不需敏感權限的可靠來源才顯示；不可取得不阻擋。HDMI 只列來源確定的埠與連接狀態，不承諾列齊所有實體埠，不顯示目前使用中、解析度或訊號品質。空來源不是「全部未連接」的證據；只在明確完整覆蓋且全部否定時可顯示無已連接埠。
+-- P11-03 建議儲存只讀 Launcher 所在本機資料磁碟的 available-to-app 與 total bytes；可用量不是裝置全部 free bytes，總量不是本 App 空間配額；不計已用量或百分比，避免把系統保留量誤認為使用者資料。總量／可用量須同來源同快照；不跨快照配對，不猜硬體標稱容量。零可用量有效；負值、缺值、可用量大於總量或總量非正數均不能作有效容量呈現。缺值為未知，非法數值為不可用（資料無效）。
++- P11-02（Approved／Closed）最小內容：網路只讀目前預設網路（Wi-Fi／乙太網路／其他／無預設網路）；不顯示 IP、MAC、訊號強度、網速或宣稱 Internet 可用。SSID 僅已有不需敏感權限的可靠來源才顯示；不可取得不阻擋。HDMI 只列來源確定的埠與連接狀態，不承諾列齊所有實體埠，不顯示目前使用中、解析度或訊號品質。空來源不是「全部未連接」的證據；只在明確完整覆蓋且全部否定時可顯示無已連接埠。
++- P11-03（Approved／Closed）儲存只讀 Launcher 所在本機資料磁碟的 available-to-app 與 total bytes；可用量不是裝置全部 free bytes，總量不是本 App 空間配額；不計已用量或百分比，避免把系統保留量誤認為使用者資料。總量／可用量須同來源同快照；不跨快照配對，不猜硬體標稱容量。零可用量有效；負值、缺值、可用量大於總量或總量非正數均不能作有效容量呈現。缺值為未知，非法數值為不可用（資料無效）。
+ - 時間與日期／星期使用同一次快照，不混用跨午夜或跨時區值；時鐘不驗證外部世界的正確時間，也不擅自校時。時間資料失敗只降級時間／日期，不干擾其他資訊。
+ - 各欄位有獨立查詢世代；開始新讀取、resume、已知變更或資料失效時清除該欄舊的「目前值」，顯示未知；完成後改為正常或不可用。一次失敗不清除其他仍有效欄位。逾時／前次生命週期／被取代查詢的晚回應丟棄。資訊狀態與 H/O 狀態彼此獨立。
+ - 首次、resume、已接收的本機變更事件觸發讀取；前景週期補償漏事件，背景不輪詢、不保證即時。原「重新整理」仍只執行 F06，**不擴張工具行為**；資訊自動重試在下一次週期或 resume，不新增重試按鈕。面板開啟不阻止讀取，但不能為顯示資訊而關面板或遮蔽面板焦點。
+-- **P11-01（Suggested，等待審核及實機測量）**：時間每個分鐘邊界重讀；時間／日期／格式變更事件後 1 秒內顯示有效結果。網路前景每 30 秒、HDMI／儲存每 60 秒重讀；首次／resume／已收到變更事件立即安排讀取；每欄讀取 deadline 5 秒，結果後顯示預算 1 秒。相同 deadline 時逾時優先；下一週期以最近一次讀取開始時間起算，不重疊同欄有效請求。時間讀取也受 5 秒期限，未完成即顯示未知，逾時不可用；1 秒為來源已可讀時的目標，不要求等待故障來源。這些數字不是 SA-07 已核准預算的自動延伸，也不是測量結果。
++- **P11-01（Approved／Closed，初始驗收目標仍需實機測量）**：時間每個分鐘邊界重讀；時間／日期／格式變更事件後 1 秒內顯示有效結果。網路前景每 30 秒、HDMI／儲存每 60 秒重讀；首次／resume／已收到變更事件立即安排讀取；每欄讀取 deadline 5 秒，結果後顯示預算 1 秒。相同 deadline 時逾時優先；下一週期以最近一次讀取開始時間起算，不重疊同欄有效請求。時間讀取也受 5 秒期限，未完成即顯示未知，逾時不可用；1 秒為來源已可讀時的目標，不要求等待故障來源。這些數字不是 SA-07 已核准預算的自動延伸，也不是測量結果。
+ - Gherkin 的時間、容量、SSID、HDMI 埠名僅為明示合成 fixture，用受控時鐘／來源／排程器驗規則；產品整合驗收必須分開記錄裝置、來源、權限與實際值。合法降級可滿足本資訊分支，但不得記為「HDMI 實值讀取成功」。
+ 
+ ### F12｜可更換背景
+--- v1.1-pending/03_BDD_GHERKIN_SCENARIOS.feature
++++ v1.1-approved/03_BDD_GHERKIN_SCENARIOS.feature
+@@ -1,10 +1,10 @@
+-# Status: Specification Baseline v1.1 — Home Information Enhancement
++# Status: Specification Baseline v1.1 — Approved for UI/UX Design
+ # 規格日期：2026-10-25 | Version: v1.1 | Product tests: Not Run
+ # Change Log: D1–D7 已確認；首頁固定服務＋更多 APP 覆蓋式面板。
+ # Approved Product Requirements: D1～D7、F02 單一主要入口及 F05 同一存活階段恢復面板／焦點。
+ # Approved Behavioral Baseline: SA-01～SA-07；Q1～Q5 Closed。
+ # Pending Technical Verification: mapping、API/ABI、OEM 生命週期、HOME。
+-# 首頁 A 視覺方向由使用者選定；v1.1 細化與完整設計對齊待審；Product Tests: Not Run。
++# 首頁 A 視覺方向由使用者選定；v1.1 需求與行為已核准；Pending Final UI/UX Design Review；Product Tests: Not Run。
+ # v1.1 Active 105：保留 v1.0 的 85，新增 F11 的 20（SC-095～SC-114）；Retired 9 不變。
+ # 歷史 0.1→0.2：新增 38、修改 35、沿用 12、Retired 9；本次不改這些歷史標籤。
+ # 此檔只含 Active 情境；舊 ID 歷史、原 AC 與替代對照見 04_REQUIREMENT_TRACEABILITY.md。
+@@ -12,8 +12,8 @@
+ # 根首頁指面板關閉；A/B/C 與 p.a/A 是非指定服務的合成 fixture，除非 Given 另述。
+ # YouTube/Netflix/Disney+ 的成功身分 fixture 假設核准映射存在；不是實機 mapping 證據。
+ # 真實三服務 package/component 均 TBD；沒有猜測套件名。
+-# 所有 AC、焦點序列與狀態定義以 02 為準；F01～F08 的 SA-07 預算已核准待實測；F11 的 P11-01 預算仍待審及實測。
+-# Review: Approved Change Request — Draft Pending v1.1 Final User Review。D8 範圍已核准。F11 全部情境為受控 fixture，不是 Xiaomi 資訊讀取證據。
++# 所有 AC、焦點序列與狀態定義以 02 為準；F01～F08 的 SA-07 預算已核准待實測；F11 的 P11-01 已核准為初始驗收目標、仍待實測。
++# Review: Approved Product Requirements / Approved Behavioral Baseline。D8 與 P11-01～P11-03 已核准（Approved／Closed）。F11 全部情境為受控 fixture，不是 Xiaomi 資訊讀取證據。
+ # F11 是既有狀態訊息的唯讀擴充；不改原 85 個情境的入口、工具、焦點、離線或安全行為。
+ # 不建立 step definitions，不執行產品測試；安裝與裝置動作需未來另行授權。
+ # SC-009: Replaced (Retired) -> SC-058, SC-063; 舊單一全 App 首頁改為指定 App 與面板兩個集合
+@@ -26,7 +26,7 @@
+ # SC-019: Replaced (Retired) -> SC-071, SC-088; 方向 repeat 必須按新版首頁／面板分開定義
+ # SC-041: Replaced (Retired) -> SC-077, SC-078; 最後 App 消失的焦點需按首頁／面板分開修復
+ 
+-@specification_baseline_v1_1 @pending_final_user_review @manual_entry @no_home_takeover
++@specification_baseline_v1_1 @approved_for_ui_ux_design @manual_entry @no_home_takeover
+ Feature: Xiaomi Google TV 指定影音首頁與更多 APP 覆蓋式面板
+   手動進入，HOME 保留原廠；面板是 Launcher 內部狀態，不要求系統 Overlay 特殊權限。
+   MiTV-MOOR0 API 30 armeabi-v7a 與 API 36 arm64-v8a 模擬器分別驗收，不能相互替代。
+@@ -582,33 +582,33 @@
+     Then 面板可用且沒有 SYSTEM_ALERT_WINDOW 請求或授權導頁；外部 App 前景不被面板覆蓋，HOME 預設未改
+ 
+ 
+-  # F11 本機時間與唯讀裝置資訊；D8 範圍已核准，細化草案待最終審核。
+-
+-  @F11 @AC-F11-01 @SC-095 @D8 @added_1_1 @draft_v1_1
++  # F11 本機時間與唯讀裝置資訊；D8 與細化行為已核准；技術驗證與 UI/UX 最終驗收尚未完成。
++
++  @F11 @AC-F11-01 @SC-095 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-095 — 時間日期依同一系統快照與格式呈現
+     Given 合成時間來源回傳同一有效快照 T，系統時區 Z、locale L、24 小時及日期格式 D 已固定；fixture 同時提供系統格式器對 T 的時間、日期與星期預期字串
+     When 首次讀取完成並呈現首頁資訊
+     Then 時間、日期與星期各與 fixture 的系統格式器預期字串一致且不顯示秒；沒有網路請求或修改系統時間，五項資訊標籤均保留
+ 
+-  @F11 @AC-F11-01 @SC-096 @D8 @added_1_1 @draft_v1_1 @proposed_budget
++  @F11 @AC-F11-01 @SC-096 @D8 @added_1_1 @approved_v1_1 @approved_initial_target
+   Scenario: SC-096 — 系統格式與時區變更同步重算
+     Given 合成時間快照 T 已顯示，來源由 24 小時改為 12 小時並更換時區與 locale；fixture 已提供新設定的時間、日期及星期預期字串
+     When 受控來源送出設定變更事件並立即提供同一 T 在新設定下的快照
+-    Then 依待審 P11-01 在事件後 1 秒內，三項字串皆符合新系統格式，包含 12 小時所需的日間時段標示，沒有保留舊時區日期或修改系統設定
+-
+-  @F11 @AC-F11-01 @SC-097 @D8 @added_1_1 @draft_v1_1 @proposed_budget
++    Then 依已核准 P11-01 在事件後 1 秒內，三項字串皆符合新系統格式，包含 12 小時所需的日間時段標示，沒有保留舊時區日期或修改系統設定
++
++  @F11 @AC-F11-01 @SC-097 @D8 @added_1_1 @approved_v1_1 @approved_initial_target
+   Scenario: SC-097 — 跨午夜時間日期星期一起更新
+     Given 受控系統時鐘固定在某本機日期的最後一分鐘，fixture 已指定下一日期與星期的格式器預期字串，資料可立即讀取
+     When 受控時鐘跨越本機午夜且排程器送出分鐘更新事件
+-    Then 依待審 P11-01 在 1 秒內顯示新分鐘、新日期與新星期；可觀察提交狀態不出現新時間配舊日期／星期
+-
+-  @F11 @AC-F11-01 @SC-098 @D8 @added_1_1 @draft_v1_1
++    Then 依已核准 P11-01 在 1 秒內顯示新分鐘、新日期與新星期；可觀察提交狀態不出現新時間配舊日期／星期
++
++  @F11 @AC-F11-01 @SC-098 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-098 — 時間來源失敗不得使用設計稿固定時間
+     Given 受控時間來源初始未完成，其他資訊來源有效；設計 fixture 另有不屬於資料來源的示意時間字串
+     When 先觀察未完成狀態，再令時間來源回報讀取失敗
+     Then 未完成時顯示時間未知及日期未知；失敗後時間與日期欄均顯示無法取得（讀取失敗），不顯示示意時間或推測星期，其他有效資訊保留
+ 
+-  @F11 @AC-F11-02 @SC-099 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-02 @SC-099 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-099 — 已知網路類型與名稱可部分降級
+     Given 受控預設網路來源確認 Wi-Fi 已連線且提供合成名稱 TEST-NET-A，未提供 Internet 可用證據
+     When 提交該有效快照
+@@ -618,37 +618,37 @@
+     When 再依序提交確認乙太網路連線及確認無預設網路的兩次有效快照
+     Then 分別顯示乙太網路已連線及無預設網路，不殘留 Wi-Fi 名稱，不推論 Wi-Fi 無線電開關狀態
+ 
+-  @F11 @AC-F11-02 @SC-100 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-02 @SC-100 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-100 — 網路未知與拒絕不能當成斷線
+     Given 受控網路來源尚未回傳任何有效狀態
+     When 先觀察初始狀態，再令來源回報存取被拒
+     Then 初始網路欄顯示狀態未知；拒絕後顯示無法取得（權限不足），兩階段均不顯示未連線、假名稱或權限授權提示
+ 
+-  @F11 @AC-F11-03 @SC-101 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-03 @SC-101 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-101 — HDMI 連接證據不等於目前輸入
+     Given 合成 HDMI 來源明示完整涵蓋 fixture 的兩個埠，TEST-HDMI-A 為已連接、TEST-HDMI-B 為未連接，沒有目前輸入或訊號證據
+     When 讀取成功並提交資訊
+     Then HDMI 連接狀態欄依來源列出兩個埠及各自連接狀態，不標為目前使用中或播放中，輸入源切換請求數為 0；本情境結果不構成 Xiaomi 實值證據
+ 
+-  @F11 @AC-F11-03 @SC-102 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-03 @SC-102 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-102 — HDMI 部分或空來源不冒充全部斷線
+     Given 合成 HDMI 來源只確認 TEST-HDMI-A 未連接並明示覆蓋範圍不完整
+     When 提交部分結果，再在下一讀取提交覆蓋範圍未知的空集合
+     Then 第一階段顯示 TEST-HDMI-A 未連接及部分資訊，不推測其他埠；第二階段顯示狀態未知，不顯示全部未連接或憑空補 HDMI 編號
+ 
+-  @F11 @AC-F11-03 @SC-103 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-03 @SC-103 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-103 — HDMI 無安全來源時保留欄位降級
+     Given 受控能力來源回報一般 APK 無受支援的 HDMI 資料來源，主要 App 清單有效
+     When 提交該能力結果
+     Then HDMI 連接狀態欄保留並顯示無法取得（不支援）；沒有敏感／特權授權要求、設定導頁或切換輸入請求，更多 APP 仍可開啟
+ 
+-  @F11 @AC-F11-04 @SC-104 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-04 @SC-104 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-104 — 儲存容量具有明確單位及磁碟範圍
+     Given 合成來源回傳 Launcher 所在本機資料磁碟同一快照：總量 32000000000 bytes、可用量 12000000000 bytes；另有 USB／NAS fixture 但不屬於此來源
+-    When 依待審 P11-03 呈現容量
++    When 依已核准 P11-03 呈現容量
+     Then 標籤為本機資料磁碟（Launcher 所在），顯示可用 12.0 GB／總計 32.0 GB 並可見 1 GB = 1,000,000,000 bytes 的單位說明；不合計 USB／NAS、不標為硬體容量或 App 配額
+ 
+-  @F11 @AC-F11-04 @SC-105 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-04 @SC-105 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-105 — 儲存零值小值及非法數值可辨識
+     Given 受控容量來源每次皆回傳總量 32000000000 bytes；測試序列的可用量為 0、50000000、-1、33000000000 bytes
+     When 依序完成四次獨立讀取，每次觀察完成後畫面
+@@ -656,31 +656,31 @@
+     When 再提交總量 0 bytes、可用量 0 bytes 的快照
+     Then 顯示無法取得（資料無效），不顯示正常 0.0 GB 磁碟
+ 
+-  @F11 @AC-F11-04 @SC-106 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-04 @SC-106 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-106 — 儲存缺值及讀取失敗不假造容量
+     Given 受控儲存來源在一次完成結果缺少可用量，其他資訊來源有效
+     When 呈現缺值結果，下一次讀取再回報明確錯誤
+     Then 缺值時儲存欄為狀態未知；錯誤後為無法取得（讀取失敗），不沿用其他快照容量或設計稿數字，其他資訊不被清除
+ 
+-  @F11 @AC-F11-05 @SC-107 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-05 @SC-107 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-107 — 資訊區不加入既有方向鍵焦點序列
+     Given 首頁 H 為 YouTube、Netflix、Disney+，Netflix 聚焦，最後工具為重新整理；五個資訊項分別含正常、未知與不可用狀態且可識別
+     When 依序按下並放開 Right、Right、Up、Right、Down，每次觀察焦點
+     Then 唯一焦點依序為 Disney+、更多 APP、重新整理、系統設定、更多 APP；五個資訊項從未取得焦點，焦點圖沒有新增節點或 App 啟動請求
+ 
+-  @F11 @AC-F11-05 @SC-108 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-05 @SC-108 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-108 — 資訊區啟用事件不導頁不改設定
+     Given 首頁更多 APP 聚焦，受控 UI fixture 可識別五項資訊區但不強制改焦點；初始設定開啟、App 啟動、網路變更、HDMI 切換與權限請求計數皆為 0
+     When 經 UI 事件派送向五個資訊項逐一送出一次 Click 啟用事件，不直接呼叫功能；不能接收事件的項目記為拒絕而不轉送
+     Then 每次後全部請求計數仍為 0、更多 APP 仍唯一聚焦、面板未開啟；資訊項沒有新操作畫面或啟用動作
+ 
+-  @F11 @AC-F11-06 @SC-109 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-06 @SC-109 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-109 — 首頁資訊更新不搶 App 焦點
+     Given 首頁 Netflix stable key 為唯一焦點，H/O 快照 V1、App 顯示位置與可見區已記錄；沒有 App 查詢或按鍵事件
+     When 受控資訊來源依序提交有效時間／日期、網路失敗、HDMI 更新及儲存更新結果
+     Then 每次提交後 Netflix stable key 仍唯一聚焦，Home 層、H/O V1、App 可見區均不變，面板沒有自動開啟；只有相應資訊欄位更新
+ 
+-  @F11 @AC-F11-06 @SC-110 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-06 @SC-110 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-110 — 面板資訊更新不改焦點與開關狀態
+     Given 面板 O 為 A、B，B 為唯一焦點且其可見區已記錄，H/O 為 V1；受控資訊來源將同時提供時間、網路、HDMI 與儲存的新結果
+     When 在面板開啟時提交資訊結果，不輸入按鍵
+@@ -688,7 +688,7 @@
+     When 使用者另按一次 Back 關閉面板
+     Then 更多 APP 唯一聚焦，首頁資訊顯示此次有效結果或各欄降級狀態，不為更新而重開面板
+ 
+-  @F11 @AC-F11-06 @SC-111 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-06 @SC-111 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-111 — 資訊來源全部失敗仍可使用主要入口
+     Given 所有資訊來源受控為讀取失敗，H/O 有效，H 有 YouTube、O 有 A，更多 APP 聚焦；App A 與系統設定有會顯示可辨識畫面的受控目標
+     When 提交資訊失敗後在更多 APP 按 OK
+@@ -698,23 +698,23 @@
+     When 按 Back 關閉面板、Up 到重新整理並按 OK，取得成功 App 快照後按 Right 到系統設定再按 OK
+     Then 重新整理查詢完成且系統設定受控畫面出現；上述過程不出現資訊授權提示，F06 不等待或觸發資訊讀取
+ 
+-  @F11 @AC-F11-07 @SC-112 @D8 @added_1_1 @draft_v1_1 @proposed_budget
++  @F11 @AC-F11-07 @SC-112 @D8 @added_1_1 @approved_v1_1 @approved_initial_target
+   Scenario: SC-112 — 逾時與舊回應不冒充目前資訊
+-    Given 網路欄已有合成 TEST-NET-A，受控排程器在 t=0 開始新查詢 Q1；Q1 到第 6 秒才回傳，採待審 P11-01 的 5 秒期限
++    Given 網路欄已有合成 TEST-NET-A，受控排程器在 t=0 開始新查詢 Q1；Q1 到第 6 秒才回傳，採已核准 P11-01 的 5 秒期限
+     When 開始 Q1 並觀察 t=0、t=5 秒，再在 t=6 秒送達 Q1 舊值
+     Then t=0 顯示狀態未知而不顯示 TEST-NET-A 為目前值；t=5 秒判定逾時並於顯示預算內顯示無法取得（逾時）；Q1 晚到不恢復舊名稱
+     When 下一合法讀取 Q2 回傳確認乙太網路已連線
+     Then 顯示乙太網路已連線並清除該欄逾時，其他有效欄位不受影響
+ 
+-  @F11 @AC-F11-07 @SC-113 @D8 @added_1_1 @draft_v1_1 @proposed_budget
++  @F11 @AC-F11-07 @SC-113 @D8 @added_1_1 @approved_v1_1 @approved_initial_target
+   Scenario: SC-113 — 前景週期與恢復補償不建立背景輪詢
+-    Given 受控排程器採待審 P11-01，t=0 四個來源均已完成一次讀取；來源後續可立即回傳，沒有變更事件或 resume
++    Given 受控排程器採已核准 P11-01，t=0 四個來源均已完成一次讀取；來源後續可立即回傳，沒有變更事件或 resume
+     When 前景推進至 t=30 秒，再至 t=60 秒
+     Then 網路分別在 30 及 60 秒開始重讀；HDMI 與儲存於 30 秒無新增讀取而於 60 秒各重讀一次；同欄有效查詢不重疊
+     When 轉入背景並推進 120 秒，再返回同一存活操作階段
+     Then 背景期間沒有週期讀取；resume 對資訊重新讀取，舊值先標未知再呈現新結果，操作層與焦點依原 F05 保留
+ 
+-  @F11 @AC-F11-07 @SC-114 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-07 @SC-114 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-114 — 正式資料缺失不能由示意資料補值
+     Given 受控整合環境選用正式資料路徑，所有本機資訊讀取均回報不支援；測試資源另含明示示意的時間、SSID、HDMI 及容量字串
+     When 手動開啟首頁並檢視資訊畫面與資料來源記錄
+--- v1.1-pending/04_REQUIREMENT_TRACEABILITY.md
++++ v1.1-approved/04_REQUIREMENT_TRACEABILITY.md
+@@ -1,21 +1,23 @@
+ # 04｜Requirement Traceability and Revision Review
+ 
+-**Status: Specification Baseline v1.1 — Home Information Enhancement**  
++**Status: Specification Baseline v1.1 — Approved for UI/UX Design**  
+ **規格日期：2026-10-25｜版本：v1.1｜產品測試狀態：Not Run**
+ 
+ ## v1.1 受控變更與核准界線
+ 
+-**審核狀態：Approved Change Request — Draft Pending v1.1 Final User Review**
++**審核狀態：Approved Product Requirements / Approved Behavioral Baseline**
+ 
+ - **D8 已核准的變更範圍**：採 Google Stitch 第一張「首頁 A」為正式視覺方向；首頁保留本機時間、日期與星期、Wi-Fi／網路、HDMI、本機儲存五項唯讀資訊，不新增焦點或操作。
+ - **既有已核准基線**：F01～F08 的 AC 與原 85 個 Active Scenario 行為不變；SA-01～SA-07 與 Q1～Q5 Closed 保留。D4 僅「時鐘／資訊排除」由 D8 修訂，其餘限制不變。
+-- **待最終審核**：v1.1 整份文件、F11 AC／BDD 細化及 P11-01～P11-03 建議細節尚待審核；D8 已核准不等於所有衍生規則已核准。
++- **Approved Product Requirements**：D1～D8 與 v1.1 MVP AC／BDD 已核准；F11 維持 Must Have。
++- **Approved Behavioral Baseline**：SA-01～SA-07 保留；P11-01～P11-03 全部 Approved／Closed。所有效能數字仍是初始驗收目標，需實機測量。
++- **Pending Final UI/UX Design Review**：首頁 A 方向已選定，不表示完整 UI/UX 已驗收；最終畫面、焦點及錯誤／降級狀態對齊仍待審核。
+ - **設計證據**：首頁 A 選擇依本次使用者陳述記錄；本次未操作 Stitch 或檢視其圖稿，未取得可鎖版的畫面 ID／匯出版本，不能據此宣稱全部畫面、焦點及錯誤狀態設計已核准。
+ - **Pending Technical Verification / Product Tests: Not Run**：一般 APK 可讀資訊及 Xiaomi 真實行為均待驗證；受控 fixture 不是裝置證據。手動啟動及獨立 G-HOME 不變。
+ 
+ ### Change Log — v1.0 → v1.1
+ 
+-F11 由 Should 升為 Must「本機時間與唯讀裝置資訊」；修訂 AC-F11-01，追加 F11 AC 及從 SC-095 起的新情境。F01 只補資訊顯示範圍，工具仍恰為重新整理／系統設定。F11 不加入 F06 的 App 清單查詢或焦點狀態；資訊失敗只在本欄降級。詳細 ID 與計數見 04。以下 v1.0 及更早的核准／Change Log 只記錄當時狀態，不代表 v1.1 已最終核准。
++F11 由 Should 升為 Must「本機時間與唯讀裝置資訊」；修訂 AC-F11-01，追加 F11 AC 及從 SC-095 起的新情境。F01 只補資訊顯示範圍，工具仍恰為重新整理／系統設定。F11 不加入 F06 的 App 清單查詢或焦點狀態；資訊失敗只在本欄降級。詳細 ID 與計數見 04。本次定稿只更新核准狀態，不修改行為、數值或 ID。以下 v1.0 及更早的核准／Change Log 保留當時狀態；現行核准狀態以本節為準，不代表技術或設計驗收通過。
+ 
+ ## 歷史核准紀錄（Draft 0.2 → v1.0）
+ 
+@@ -38,7 +40,7 @@
+ 
+ ## v1.1 現行統計與 v1.0 → v1.1 變更
+ 
+-| 項目 | v1.0 歷史 | v1.1 現行草案 |
++| 項目 | v1.0 歷史 | v1.1 現行已核准基線 |
+ |---|---:|---:|
+ | Feature 總數 | 16 | 16 |
+ | Must Feature | 8 | 9（F01～F08、F11） |
+@@ -51,9 +53,9 @@
+ | Scenario Outline／Examples | 0／0 | 0／0 |
+ | 產品測試 | Not Run | Not Run |
+ 
+-- D8：首頁 A 及五項唯讀資訊的範圍已核准；以下細化為待 v1.1 最終審核草案。
++- D8：首頁 A 及五項唯讀資訊的範圍已核准；以下細化／AC／BDD 亦已核准。
+ - F01～F08：35 個 AC、85 個原 Active Scenario 的原文／ID／標籤／主要追溯全數保留；F01 只補充唯讀狀態資訊的顯示範圍，不增可互動工具。
+-- F11：Should → Must；更名為「本機時間與唯讀裝置資訊」。AC-F11-01 保留同一時間責任 ID，但由候選改為本版時間／日期／星期／系統格式需求；原候選「下一分鐘內」改由待審 P11-01 明定預算，不冒稱原已核准。新增 AC-F11-02～AC-F11-07，共 7 個 F11 Must AC。
++- F11：Should → Must；更名為「本機時間與唯讀裝置資訊」。AC-F11-01 保留同一時間責任 ID，但由候選改為本版時間／日期／星期／系統格式需求；原候選「下一分鐘內」改由已核准 P11-01 明定預算，此為本次 v1.1 核准，不回溯冒稱原候選已核准。新增 AC-F11-02～AC-F11-07，共 7 個 F11 Must AC。
+ - 新增 20 個 Scenario：SC-095～SC-114；原 85 個沒有新增修改或退役，原 9 個 Retired 不復用，無新增退役 AC。
+ - 本次 AC 差異：42 個原 AC 原文不變、1 個修訂（AC-F11-01）、6 個新增；F11 原候選 AC 移入 Must，不重複計數。
+ - 原 85 列的 Revision 欄與 Scenario 的 0.1／0.2 tags 仍指原歷史遷移；本次全部 Unchanged from v1.0。F11 的 Added v1.1 才是本次新增。
+@@ -70,7 +72,7 @@
+ | D8 | F11 / Must Have | AC-F11-06 | 更新不改焦點與主要操作 | SC-109, SC-110, SC-111 |
+ | D8 | F11 / Must Have | AC-F11-07 | 分欄狀態、更新與真實資料界線 | SC-112, SC-113, SC-114 |
+ 
+-F11 新 AC 與情境皆適用 P11-01～P11-03 待審細化；未來測試需記錄該次採用的已核准預算。低層 fixture 證明呈現及降級規則，不證明 Xiaomi 有 HDMI／SSID 等真實讀取能力。G6 必須另存來源、權限、裝置與實值或不可用原因。既有 F08 相容性情境不改文；v1.1 發布另需 F11 在兩目標的資料來源與降級證據，不以 SC-046 的原範圍遺漏 F11。
++F11 新 AC 與情境皆適用 P11-01～P11-03 已核准細化；未來測試需記錄該次採用的已核准預算。低層 fixture 證明呈現及降級規則，不證明 Xiaomi 有 HDMI／SSID 等真實讀取能力。G6 必須另存來源、權限、裝置與實值或不可用原因。既有 F08 相容性情境不改文；v1.1 發布另需 F11 在兩目標的資料來源與降級證據，不以 SC-046 的原範圍遺漏 F11。
+ 
+ ## 歷史 v1.0 靜態複核統計（非 v1.1 現行數量）
+ 
+@@ -458,6 +460,14 @@
+ F09、F10、F12～F16 的 AC 是未來納入條件或範圍約束；F11 已由 D8 納入 Must，不屬此排除集合。因此上述非 MVP AC 本次不產生對應功能 Scenario，也不列為 Must 覆蓋缺口。Won't 中的安全／排除邊界已有 F01、F02、F08 的 Must 情境支撐。若任何項目升為 Must，必須先新增 AC／BDD／本表，再取得範圍核准。
+ 
+ 
++### v1.1 本次定稿核對
++
++本次僅將 D8／P11 的核准狀態、F11 狀態標籤及「待審 P11」引用改為已核准；沒有新增、刪除或重新設計 AC／Scenario。保留 v1.0→v1.1 的歷史新增／修改紀錄，不把歷史差異誤認為本次變更。
++
++實際重算：9 個 Must Feature、42 個 Must AC、105 個唯一 Active Scenario、9 個 Retired；F11 為 7 個 AC／20 個 Scenario，雙向追溯完整。原有 85 個 Scenario 記錄逐項完全相同；全部 105 個 Scenario 與 49 個 AC 在僅正規化核准狀態文字後完全相同，數值、輸入與可觀察結果未改。
++
++Gherkin 使用既有有限語法結構檢查（含多階段 When／Then）；未安裝官方 parser，未執行產品測試。Feature 狀態標籤已改為 approved_for_ui_ux_design；F11 狀態標籤為 approved_v1_1／approved_initial_target，Feature／AC／Scenario／D8 ID 與歷史 revision tags 保留。未發現需要更改行為的明確矛盾。
++
+ ### v1.1 靜態檢查結果
+ 
+ - 重新解析文件：16 Feature；9 Must（F01～F08、F11）；42 Must AC 全覆蓋，49 全部 AC；105 個唯一 Active Scenario；9 個 Retired，替代 ID 均有效。
+@@ -465,8 +475,8 @@
+ - 唯一修訂的既有 AC 為 AC-F11-01；新增 AC-F11-02～07 與 SC-095～114。F11 全部新情境含 @D8、@F11 及唯一 AC／Scenario tags。
+ - Active 表與 Gherkin 三元組／標題完全相符；42 列反向 AC 覆蓋與正向對應相同；Markdown 表格欄數一致。
+ - Gherkin 檢查只涵蓋本檔使用的 Feature／Scenario／tags／Given–When–Then／And 多階段結構，不是官方 Cucumber parser 驗證，不建立或執行 step definitions。
+-- 語意複核：D4 時鐘排除僅作歷史，D8 不新增操作；正常否定值與未知／不可用分開；資訊刷新不影響 F06／F05；HDMI 讀取與切換分開；P11 預算明列待審；降級不是實值能力證據。
+-- 本次為文件靜態檢查，產品測試與裝置能力驗證仍 Not Run；不是 v1.1 最終核准。
++- 語意複核：D4 時鐘排除僅作歷史，D8 不新增操作；正常否定值與未知／不可用分開；資訊刷新不影響 F06／F05；HDMI 讀取與切換分開；P11 預算已核准為初始驗收目標，仍待實機測量；降級不是實值能力證據。
++- 本次為文件靜態檢查，產品測試與裝置能力驗證仍 Not Run；核准來自使用者明確決策，而非本靜態檢查。
+ 
+ ## 靜態一致性檢查與語意複核
+ 
+@@ -474,11 +484,11 @@
+ 
+ - Feature／AC／Active Scenario 定義唯一；所有 Active 的主要 AC 屬於其 Feature；全部 Must AC 至少一個 Active Scenario。
+ - 03 的 tag／標題 ID 與 04 Active 三元組完全相同；原 56 個 ID 全部有處置，Replaced 不出現在 Active 宣告且每個替代 ID 存在。
+-- 0.2 歷史新情境從 SC-057 追加；本次 v1.1 從 SC-095 追加，不重用舊 ID；D8 已核准範圍、P11 待審細化與技術未知分開。
+-- 五文件均為 Specification Baseline v1.1 — Home Information Enhancement，屬已核准需求變更的草案、等待 v1.1 最終審核；產品結果維持 Not Run。重新計算數量，舊 56 僅留在歷史欄位。
++- 0.2 歷史新情境從 SC-057 追加；本次 v1.1 從 SC-095 追加，不重用舊 ID；D8 已核准範圍、P11 已核准細化與技術未知分開。
++- 五文件均為 Specification Baseline v1.1 — Approved for UI/UX Design，產品需求與行為已核准，UI/UX 最終驗收仍 Pending；產品結果維持 Not Run。重新計算數量，舊 56 僅留在歷史欄位。
+ - 01 的環境基線與原安全流程保留；G0–G7、G-HOME 仍在 05；F15 未因已確認未來高優先級而擅自變成 MVP。
+ - 新首頁不再套用 C 欄網格；面板開啟時無背景焦點／操作；H 空與 O 空、查詢 error 與成功 empty 分開；覆蓋式面板與系統 Overlay 權限分開。
+ - 映射未確認不宣稱未安裝，指定服務全部入口抑制政策與未知映射降級列 SA-04；不臆造真實 package/component。
+ - Back 階層、repeat 消費、資料原子提交、來源層恢復與晚回呼不重開面板均有可觀察情境。
+ 
+-v1.0 產品需求／行為基線及 D8 範圍已由使用者核准；F11 細化仍待 v1.1 最終審核。本次靜態檢查不等於 Android 相容性或產品測試通過。Q1～Q5 Closed；SA-01～SA-07 Approved Behavioral Baseline；實際 mapping 與 G1～G7／G-HOME 仍 Not Run／Not Verified。G0 的 v1.0 規格已核准；D8 首頁 A 方向與資訊範圍已核准，但 v1.1 最終規格及完整設計對齊仍 Pending。完成後停止，等待 v1.1 審核。
++v1.0 產品需求／行為基線及 D8 範圍已由使用者核准；F11 細化已核准。本次靜態檢查不等於 Android 相容性或產品測試通過。Q1～Q5 Closed；SA-01～SA-07 Approved Behavioral Baseline；實際 mapping 與 G1～G7／G-HOME 仍 Not Run／Not Verified。G0 的 v1.0 規格已核准；D8 首頁 A 方向與資訊範圍已核准，v1.1 規格已核准，完整設計對齊及最終 UI/UX 審核仍 Pending。完成後停止，等待下一步指示。
+--- v1.1-pending/05_OPEN_QUESTIONS_AND_RISKS.md
++++ v1.1-approved/05_OPEN_QUESTIONS_AND_RISKS.md
+@@ -1,21 +1,23 @@
+ # 05｜Open Questions, Risks and Technical Gates
+ 
+-**Status: Specification Baseline v1.1 — Home Information Enhancement**  
++**Status: Specification Baseline v1.1 — Approved for UI/UX Design**  
+ **規格日期：2026-10-25｜版本：v1.1｜產品測試狀態：Not Run**
+ 
+ ## v1.1 受控變更與核准界線
+ 
+-**審核狀態：Approved Change Request — Draft Pending v1.1 Final User Review**
++**審核狀態：Approved Product Requirements / Approved Behavioral Baseline**
+ 
+ - **D8 已核准的變更範圍**：採 Google Stitch 第一張「首頁 A」為正式視覺方向；首頁保留本機時間、日期與星期、Wi-Fi／網路、HDMI、本機儲存五項唯讀資訊，不新增焦點或操作。
+ - **既有已核准基線**：F01～F08 的 AC 與原 85 個 Active Scenario 行為不變；SA-01～SA-07 與 Q1～Q5 Closed 保留。D4 僅「時鐘／資訊排除」由 D8 修訂，其餘限制不變。
+-- **待最終審核**：v1.1 整份文件、F11 AC／BDD 細化及 P11-01～P11-03 建議細節尚待審核；D8 已核准不等於所有衍生規則已核准。
++- **Approved Product Requirements**：D1～D8 與 v1.1 MVP AC／BDD 已核准；F11 維持 Must Have。
++- **Approved Behavioral Baseline**：SA-01～SA-07 保留；P11-01～P11-03 全部 Approved／Closed。所有效能數字仍是初始驗收目標，需實機測量。
++- **Pending Final UI/UX Design Review**：首頁 A 方向已選定，不表示完整 UI/UX 已驗收；最終畫面、焦點及錯誤／降級狀態對齊仍待審核。
+ - **設計證據**：首頁 A 選擇依本次使用者陳述記錄；本次未操作 Stitch 或檢視其圖稿，未取得可鎖版的畫面 ID／匯出版本，不能據此宣稱全部畫面、焦點及錯誤狀態設計已核准。
+ - **Pending Technical Verification / Product Tests: Not Run**：一般 APK 可讀資訊及 Xiaomi 真實行為均待驗證；受控 fixture 不是裝置證據。手動啟動及獨立 G-HOME 不變。
+ 
+ ### Change Log — v1.0 → v1.1
+ 
+-F11 由 Should 升為 Must「本機時間與唯讀裝置資訊」；修訂 AC-F11-01，追加 F11 AC 及從 SC-095 起的新情境。F01 只補資訊顯示範圍，工具仍恰為重新整理／系統設定。F11 不加入 F06 的 App 清單查詢或焦點狀態；資訊失敗只在本欄降級。詳細 ID 與計數見 04。以下 v1.0 及更早的核准／Change Log 只記錄當時狀態，不代表 v1.1 已最終核准。
++F11 由 Should 升為 Must「本機時間與唯讀裝置資訊」；修訂 AC-F11-01，追加 F11 AC 及從 SC-095 起的新情境。F01 只補資訊顯示範圍，工具仍恰為重新整理／系統設定。F11 不加入 F06 的 App 清單查詢或焦點狀態；資訊失敗只在本欄降級。詳細 ID 與計數見 04。本次定稿只更新核准狀態，不修改行為、數值或 ID。以下 v1.0 及更早的核准／Change Log 保留當時狀態；現行核准狀態以本節為準，不代表技術或設計驗收通過。
+ 
+ ## 歷史核准紀錄（Draft 0.2 → v1.0）
+ 
+@@ -45,7 +47,7 @@
+ 
+ ## 已核准產品決策與已關閉問題
+ 
+-D1～D7、F02 單一主要入口與 F05 同一存活操作階段的面板／焦點恢復均 Approved。使用者已接受 Q1～Q5 與 SA-01～SA-07；下表全部 Closed；它們不因 D8 重開，v1.1 新增待審細節另列 P11-01～P11-03。技術未知不因產品核准而關閉。
++D1～D7、F02 單一主要入口與 F05 同一存活操作階段的面板／焦點恢復均 Approved。使用者已接受 Q1～Q5 與 SA-01～SA-07；下表全部 Closed；它們不因 D8 重開，P11-01～P11-03 亦已 Approved／Closed。技術未知不因產品核准而關閉。
+ 
+ | 已關閉問題 | Approved Behavioral Baseline | 影響 |
+ |---|---|---|
+@@ -62,17 +64,17 @@
+ - **T-LIFECYCLE：** Xiaomi 從原廠清單重開時是否回到原操作階段或新建實例；兩分支分別驗收，不宣稱已知。
+ - **T-UI／T-BUILD：** UI framework、SDK／JVM／AGP／Gradle、可見性宣告仍依原流程在之後核准；面板的行為契約不是框架選型。
+ 
+-## Gate 矩陣（v1.0 已核准；v1.1 待最終審核；技術驗證 Not Run）
++## Gate 矩陣（v1.0 已核准；v1.1 需求已核准；UI/UX 待最終審核；技術驗證 Not Run）
+ 
+ 所有「操作／產物」都是**未來批准後**要做的事。此階段不 Build、不安裝、不發 ADB 指令。
+ 
+ | Gate／先後 | 能力與依據 | 驗證目標／前提 | 未來方法與可觀察 Pass 條件 | 失敗處理與發布影響 | 對應需求 |
+ |---|---|---|---|---|---|
+-| G0 | 規格、安全、設計流程 | 米勒核准五文件；再單獨核准 Stitch 設計 | v1.0 的 D1～D7、SA／AC 已核准；D8 首頁 A 方向與新增範圍已核准；v1.1 AC／BDD 細化與完整設計對齊待審，不能據方向選定宣稱所有設計核准；部署與 rollback 另行授權 | 未核准即停；不自動開發或設計 | 全部 Must |
++| G0 | 規格、安全、設計流程 | 米勒核准五文件；再單獨核准 Stitch 設計 | v1.0 的 D1～D7、SA／AC 已核准；D8 首頁 A 方向與新增範圍已核准；v1.1 AC／BDD 細化已核准，完整設計對齊仍待最終審核，不能據方向選定宣稱所有設計核准；部署與 rollback 另行授權 | 未核准即停；不自動開發或設計 | 全部 Must |
+ | G1 | Android 11/API 30、32-bit ARM、API 36 模擬器差異；native ABI [6] | B0 兩個目標；不更動全域 JDK | 先審核套件 API 需求與完整依賴樹，再於核准開發期實際 Sync/Build；候選 APK 逐一確認 native ABI，兩端各自可安裝與開啟；記錄 artifact 雜湊／API／ABI；沒有 native 時記錄 none | API 30 無法啟動或缺 armeabi-v7a 就阻擋；不能只驗 arm64；不私自升級系統或工具鏈 | F08；AC-F08-01 |
+ | G2 | 本 APK 的 LEANBACK_LAUNCHER 曝光與 HOME 區別 [3][7] | 手動啟動模式，無 HOME 註冊與切換 | 原廠 App 清單可見自訂入口，以遙控開啟；前後 HOME 解析不變；不是只以 shell 直接啟動成功 | 入口不曝光即阻擋；不能用 ADB 啟動假裝家庭可用，更不能停用原廠 | F01、F05、F08 |
+ | G3 | Android 11 Package Visibility、TV／Google TV App Discovery [1][2][3] | 核准目標 targetSdk，已知合格 App 基線與可控套件 fixture | 在本 APK 身分查詢，不拿 shell 查詢代替；合格集合比對無漏項、無被排除項；需核對三指定服務身分來源、package/component 優先序及 H/O 排除分區；分別驗全有／部分／全缺與 mapping 未確認；再驗多入口、metadata、安裝／停用／更新／移除；所需可見性最小化 | 漏查或三指定服務 mapping 未確認都不通過；不得假裝是未安裝或只呈空清單；不自動加入 QUERY_ALL_PACKAGES 或修改系統權限 | F02、F06 |
+-| G4 | D-pad／Focus 與實機遙控 [4] | 核准後的焦點設計；可控 0/1/100 筆 fixture | 首頁工具／指定 App／更多 APP 可達；面板單焦點、trap、不穿透、空面板安全關閉、按鍵 repeat 隔離、捲動與安全區；測原有 1 秒回應與 5 秒資料預算；追加 F11 正常／未知／不可用資訊不入焦點圖，更新及長文字不搶焦點、不遮住操作項；新增預算 P11-01 待審及實測 | 只用滑鼠可操作或模擬器鍵盤通過不算實機 Pass；需真遙控證據 | F03；F06 焦點修復；F11 |
++| G4 | D-pad／Focus 與實機遙控 [4] | 核准後的焦點設計；可控 0/1/100 筆 fixture | 首頁工具／指定 App／更多 APP 可達；面板單焦點、trap、不穿透、空面板安全關閉、按鍵 repeat 隔離、捲動與安全區；測原有 1 秒回應與 5 秒資料預算；追加 F11 正常／未知／不可用資訊不入焦點圖，更新及長文字不搶焦點、不遮住操作項；P11-01 已核准為初始驗收目標、仍待實測 | 只用滑鼠可操作或模擬器鍵盤通過不算實機 Pass；需真遙控證據 | F03；F06 焦點修復；F11 |
+ | G5 | 第三方 App 啟動、Back／Home／resume／程序重建 | 受控 App 加核准真實 TV App；無系統 HOME 變更 | 精確 component 的目標前景證據；長按不重啟、拒絕／消失可恢復；根 Back 退出、面板 Back 只關面板；HOME 仍原廠；來源層與 stable key 恢復、關閉後晚回呼及程序重建分開驗收 | 送出 intent 不等於成功；不能強制第三方 Back 返回；受控返回與真實 App 路徑分別報告 | F04、F05 |
+ | G6 | 系統設定入口、HDMI 原廠路徑與直達能力界線 [5][8] | 公開設定 handler 探索；實機有既有 HDMI 來源且取得操作批准 | 設定 handler 存在時進入原廠設定；不存在／被拒絕時顯示 F07 指引。原廠 HDMI 切換在安裝前後 smoke path 都可用；本版不做直接 HDMI 控制；追加 F11 網路／HDMI 連接狀態／儲存／時間來源的逐欄可讀性、語意、單位與不可用降級檢查，方法見下節 | 設定可依已核准 F07 分支標 Degraded Accepted（不可記為直開 Pass）；原廠功能回歸阻擋。HDMI 直達只記候選能力，不阻擋本版 | F07、AC-F08-02、F11；F13 切換不在範圍 |
+ | G7 | 原廠 Launcher／復原保留、最小權限、rollback | 已記錄原廠狀態及自訂 package ID；卸載另行批准 | 內部面板不要求系統跨 App Overlay 權限且不覆蓋外部 App；前後基線 HOME、三個套件啟用狀態不變；設定、HDMI、核准串流路徑無新增回歸；只卸載自訂 APK 後可用原廠 HOME 與既有 App | 不可恢復或須停用系統套件才可用即阻擋；不得在未批准下嘗試修復系統 | F08；AC-F08-02/03 |
+@@ -93,7 +95,7 @@
+ 
+ ## 建議驗證順序與授權界線
+ 
+-1. **v1.1 草案後停止**：v1.0 與 D8 範圍已核准；先完成 v1.1 細化最終審核，再依使用者授權對齊首頁 A 與完整設計；不得因視覺方向選定自動啟動 Stitch 或 Codex TDD。
++1. **v1.1 定稿後停止**：v1.1 需求與行為已核准；後續依使用者授權對齊首頁 A 與完整設計並完成 UI/UX 最終驗收；不得因視覺方向選定自動啟動 Stitch 或 Codex TDD。
+ 2. **核准開發後先做靜態相容性／安全審查**：G1 的 API／ABI／JVM 與權限需求；保留全域舊 Java，候選工具鏈實際驗證前不稱已相容。
+ 3. **先完整走模擬器**：G1→G2→G3→G4→G5→G6→G7 的適用部分。無 HDMI／真實 DRM 證據一律標 N/A（環境限制），不能當 Pass。
+ 4. **使用者批准部署後，才走 Xiaomi**：重新確認目標 serial/IP 並明確 `-s`；先讀取並記錄基線，再安裝候選 APK 並從原廠 App 清單手動開啟；重走 G1–G7 適用部分。每個有副作用步驟事先批准；不得為製造 fixture 而停用／移除原廠套件。
+@@ -141,13 +143,13 @@
+ 
+ 此處保留 Draft 0.1 的 Android 官方來源與用途，不新增或重新聲稱本輪已查驗最新平台能力；本輪為使用者決策驅動的規格 Revision。B0 仍是使用者交接證據，官方 API 的存在仍不等於實機驗證。
+ 
+-## v1.1 待審細節與資訊能力（D8 範圍不重開）
++## v1.1 已核准細節與待驗證資訊能力
+ 
+-| ID | 建議細化（Suggested，未核准） | 審核界線 |
++| ID／狀態 | Approved Behavioral Baseline | 驗證界線 |
+ |---|---|---|
+-| P11-01 | 分鐘邊界更新時間；變更事件後可讀結果 1 秒內呈現；前景網路 30 秒、HDMI／儲存 60 秒；單欄讀取 5 秒 deadline，結果後 1 秒顯示；背景不輪詢，resume 重讀 | 等待審核及實機負載／效能測量，不沿用 SA-07 的核准名義；詳 02 的起算與逾時優先規則 |
+-| P11-02 | 網路只呈現預設網路連接類型／狀態及安全可讀名稱；不呈現 IP／MAC／速度或 Internet 保證。HDMI 只讀來源確認的埠連接狀態，不表示當前輸入或訊號。重新查詢清除該欄舊值為未知，再依結果顯示；不保留未標示過期的舊值 | 待審資料範圍與降級文字；五個資訊欄本身與不升權限制已核准 |
+-| P11-03 | 本機儲存只取 Launcher 所在資料磁碟的可用／總量，十進位 GB 一位小數；非零小值 <0.1 GB；不合計外接裝置、不顯示已用百分比 | 待審單位及磁碟範圍；不是宣稱目前已可取得 |
++| P11-01 — Approved／Closed | 分鐘邊界更新時間；變更事件後可讀結果 1 秒內呈現；前景網路 30 秒、HDMI／儲存 60 秒；單欄讀取 5 秒 deadline，結果後 1 秒顯示；背景不輪詢，resume 重讀 | 已由本次使用者明確核准，初始驗收目標仍需實機負載／效能測量；詳 02 的起算與逾時優先規則 |
++| P11-02 — Approved／Closed | 網路只呈現預設網路連接類型／狀態及安全可讀名稱；不呈現 IP／MAC／速度或 Internet 保證。HDMI 只讀來源確認的埠連接狀態，不表示當前輸入或訊號。重新查詢清除該欄舊值為未知，再依結果顯示；不保留未標示過期的舊值 | 資料範圍與降級文字已核准；五個資訊欄本身與不升權限制已核准 |
++| P11-03 — Approved／Closed | 本機儲存只取 Launcher 所在資料磁碟的可用／總量，十進位 GB 一位小數；非零小值 <0.1 GB；不合計外接裝置、不顯示已用百分比 | 單位及磁碟範圍已核准；不是宣稱目前已可取得 |
+ 
+ ### 技術待驗證清單（全數 Pending Technical Verification）
+ 
+@@ -155,7 +157,7 @@
+ - **T-INFO-NET**：一般 APK 可讀的預設網路狀態與種類、Wi-Fi 名稱是否被遮蔽、來源是否需要敏感權限；需要敏感／特權權限就降級，不為 SSID 索權。不以裝置有網路推論 Internet 可用。
+ - **T-INFO-HDMI**：一般 APK 是否有可靠公開唯讀來源；資料究竟表示埠連接、輸入選擇或訊號，是否完整涵蓋全部埠；不得混用語意。能力不存在或證據不足時顯示未知／無法取得，不以私有介面、ADB、root 或系統套件調整補救。
+ - **T-INFO-STORAGE**：讀取範圍是否確為 Launcher 所在本機資料磁碟；available-to-app／total 的來源與快照一致性、保留空間差異、無效與缺值處理。不得誤稱為硬體標稱容量，不讀檔案內容或其他 App 使用量。
+-- **T-INFO-UPDATE**：API 30／32-bit 與 API 36／64-bit 的前景定時、事件遺漏、resume、並行查詢及過期回應；P11-01 的效能數字須審核後再獨立測量。
++- **T-INFO-UPDATE**：API 30／32-bit 與 API 36／64-bit 的前景定時、事件遺漏、resume、並行查詢及過期回應；P11-01 的效能數字已核准為初始驗收目標，仍須獨立實機測量。
+ - **T-DESIGN-A**：首頁 A 的來源畫面 ID／版本或匯出檔尚未在本次提供；只記錄選擇，不臆造版型、字體、尺寸或設計完成證據。後續核對圖稿的示意值不得進入正式資料。
+ 
+ ### G6 追加唯讀資訊驗證（計畫，未執行）
+@@ -175,7 +177,7 @@
+ 
+ ## 停止點
+ 
+-本次完成五份 Specification Baseline v1.1 需求變更草案後停止，等待米勒最終審核；不宣稱整份 v1.1 已核准。禁止自動進入 Stitch、Codex、TDD、Build、安裝、HOME 試驗或任何電視設定變更。
++本次完成五份 Specification Baseline v1.1 已核准需求基線後停止，等待米勒下一步指示；Pending Final UI/UX Design Review，Product Tests: Not Run。禁止自動進入 Stitch、Codex、TDD、Build、安裝、HOME 試驗或任何電視設定變更。
+ 
+ ## Sources
+ 

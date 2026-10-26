@@ -1,0 +1,90 @@
+--- v1.0/01_PRODUCT_VISION_AND_SCOPE.md
++++ v1.1/01_PRODUCT_VISION_AND_SCOPE.md
+@@ -1,9 +1,23 @@
+ # 01｜Product Vision and Scope
+ 
+-**Status: Specification Baseline v1.0 — Approved for UI/UX Design**  
+-**規格日期：2026-10-25｜版本：v1.0｜產品測試狀態：Not Run**
++**Status: Specification Baseline v1.1 — Home Information Enhancement**  
++**規格日期：2026-10-25｜版本：v1.1｜產品測試狀態：Not Run**
+ 
+-## 核准狀態與本次定稿（Draft 0.2 → v1.0）
++## v1.1 受控變更與核准界線
++
++**審核狀態：Approved Change Request — Draft Pending v1.1 Final User Review**
++
++- **D8 已核准的變更範圍**：採 Google Stitch 第一張「首頁 A」為正式視覺方向；首頁保留本機時間、日期與星期、Wi-Fi／網路、HDMI、本機儲存五項唯讀資訊，不新增焦點或操作。
++- **既有已核准基線**：F01～F08 的 AC 與原 85 個 Active Scenario 行為不變；SA-01～SA-07 與 Q1～Q5 Closed 保留。D4 僅「時鐘／資訊排除」由 D8 修訂，其餘限制不變。
++- **待最終審核**：v1.1 整份文件、F11 AC／BDD 細化及 P11-01～P11-03 建議細節尚待審核；D8 已核准不等於所有衍生規則已核准。
++- **設計證據**：首頁 A 選擇依本次使用者陳述記錄；本次未操作 Stitch 或檢視其圖稿，未取得可鎖版的畫面 ID／匯出版本，不能據此宣稱全部畫面、焦點及錯誤狀態設計已核准。
++- **Pending Technical Verification / Product Tests: Not Run**：一般 APK 可讀資訊及 Xiaomi 真實行為均待驗證；受控 fixture 不是裝置證據。手動啟動及獨立 G-HOME 不變。
++
++### Change Log — v1.0 → v1.1
++
++F11 由 Should 升為 Must「本機時間與唯讀裝置資訊」；修訂 AC-F11-01，追加 F11 AC 及從 SC-095 起的新情境。F01 只補資訊顯示範圍，工具仍恰為重新整理／系統設定。F11 不加入 F06 的 App 清單查詢或焦點狀態；資訊失敗只在本欄降級。詳細 ID 與計數見 04。以下 v1.0 及更早的核准／Change Log 只記錄當時狀態，不代表 v1.1 已最終核准。
++
++## 歷史核准紀錄（Draft 0.2 → v1.0）
+ 
+ - **Approved Product Requirements**：D1～D7 及本版 MVP 需求已核准；F02 每指定服務僅一個主要入口、其餘同服務入口隱藏；F05 同一存活操作階段返回時保留面板與原焦點（失效項按既定規則修復）。
+ - **Approved Behavioral Baseline**：SA-01～SA-07 已核准；Q1～Q5 均 Closed。保留 SA ID 供追溯，不再表示待核准假設。
+@@ -24,7 +38,7 @@
+ 
+ ## 結論與本版範圍
+ 
+-首版為可由原廠 Google TV 手動開啟的無推薦首頁：上方只保留重新整理與系統設定；主要 App 僅在合格時依 YouTube→Netflix→Disney+ 顯示，另有永遠可用的更多 APP 入口。其他合格 TV App 由 Launcher 內部覆蓋式面板探索及啟動；首頁不再直接鋪滿所有 App。
++首版為可由原廠 Google TV 手動開啟的無推薦首頁：上方只保留重新整理與系統設定；主要 App 僅在合格時依 YouTube→Netflix→Disney+ 顯示，另有永遠可用的更多 APP 入口。其他合格 TV App 由 Launcher 內部覆蓋式面板探索及啟動；首頁不再直接鋪滿所有 App。依 D8 加入五項唯讀資訊區：本機時間、日期與星期、Wi-Fi／網路、HDMI、本機儲存；這些都是狀態訊息而非工具，資訊未知或不可用時仍保留各欄位。
+ 
+ 未安裝或沒有合格可啟動入口就隱藏並壓縮，不補空位、不用其他 App 替代、不自動導商店。三者全缺時仍保留兩工具與更多 APP。實際 package/component mapping 未確認，不把名稱或推測當身分證據。
+ 
+@@ -32,9 +46,9 @@
+ 
+ ## 文件範圍與權威
+ 
+-01 為基線與決策；02 為目前有效 Feature／AC／行為契約；03 只含 Active Gherkin；04 為現行與歷史 ID 追溯、覆蓋與靜態檢查；05 為已關閉產品決策、待驗證技術 Gate 與風險。舊版行為只保留在 04 的明示歷史對照，不再當作現行要求。所有文件狀態統一為 Specification Baseline v1.0 — Approved for UI/UX Design。
++01 為基線與決策；02 為目前有效 Feature／AC／行為契約；03 只含 Active Gherkin；04 為現行與歷史 ID 追溯、覆蓋與靜態檢查；05 為已關閉產品決策、待驗證技術 Gate 與風險。舊版行為只保留在 04 的明示歷史對照，不再當作現行要求。所有文件版本統一為 Specification Baseline v1.1 — Home Information Enhancement；已核准變更的文件草案等待 v1.1 最終審核。
+ 
+-## Approved Product Requirements（D1～D7；來源：使用者最終核准）
++## Approved Product Requirements（D1～D8；D8 為本次核准變更）
+ 
+ D1～D7 全部 Approved；SA-01～SA-07 亦已核准為行為基線。兩者均不等於技術能力已驗證。
+ 
+@@ -43,10 +57,11 @@
+ | D1 | 首版從原廠 Google TV 手動進入，不接管／更改 HOME；未來接管為高優先級目標 | F01、F05、F08、F15；G-HOME 獨立 |
+ | D2 | 首頁只放實際合格的 YouTube、Netflix、Disney+，依此固定順序；其他 TV App 進更多 APP；用可驗證身分而非名稱 | F02、F06；實際 mapping 仍待確認 |
+ | D3 | D-pad、單一可見焦點、不循環、OK 操作、合理返回焦點、根 Back 退出、HOME 仍原廠 | F03–F05；新面板轉移細節依已核准 SA |
+-| D4 | 上方只保留重新整理、系統設定；下方功能為指定 App 與更多 APP；收藏編輯、排序編輯、桌布、時鐘不在本版 | F01–F03；F09–F12 延期 |
++| D4（原始歷史決策） | v1.0：上方只保留重新整理、系統設定；下方功能為指定 App 與更多 APP；收藏編輯、排序編輯、桌布、時鐘不在本版 | D8 已修訂時鐘／唯讀資訊的排除；其他限制仍有效，F09／F10／F12 延期 |
+ | D5 | 保留 F07／F08 的公開設定入口與錯誤降級；HDMI 走原廠，不直接切換 | F07、F08、F13 |
+ | D6 | 更多 APP 使用覆蓋式面板，不是獨立頁或首頁下方展開；不要求系統 Overlay 權限；排除指定服務重複入口 | F02–F06、AC-F08-04 |
+ | D7 | 指定 App 無合格可啟動入口則隱藏、壓縮、不替補、不導商店；三者全缺仍保留更多 APP 與兩個工具 | F02、F03、F06 |
++| D8 — Approved Change Request | 採第一張「首頁 A」視覺方向；保留時間、日期與星期、Wi-Fi／網路、HDMI、本機儲存五項唯讀資訊；不增加焦點、設定或輸入源切換功能 | F01 顯示範圍；F11 Must；細化 AC／BDD 待 v1.1 最終審核 |
+ 
+ ## 基線與知識分類
+ 
+@@ -103,21 +118,21 @@
+ | F08 | 實機相容性、非破壞性與可移除性 | Must Have | MVP；Approved Product Requirements／Approved Behavioral Baseline |
+ | F09 | 收藏常用 App | Should Have | 不納入本次 MVP |
+ | F10 | 手動排序 | Could Have | 不納入本次 MVP |
+-| F11 | 本機時間資訊 | Should Have | 不納入本次 MVP |
++| F11 | 本機時間與唯讀裝置資訊 | Must Have | D8 範圍已核准；細化草案待 v1.1 最終審核 |
+ | F12 | 可更換背景 | Could Have | 不納入本次 MVP |
+ | F13 | HDMI／輸入源直達 | Could Have | 不納入本次 MVP |
+ | F14 | 手機 App 與進階 App 管理 | Won't Have | 不納入本次 MVP |
+ | F15 | 預設 HOME 接管（後續高優先級目標） | Won't Have | 不納入本次 MVP；未來高優先級，獨立 G-HOME |
+ | F16 | 推薦、雲端與 OS 改造 | Won't Have | 不納入本次 MVP |
+ 
+-F01–F08 仍是唯一 Must 集合，面板是既有 Feature 的修訂而非額外不受控專案。收藏、使用者排序、自訂桌布、時鐘均不在本版；不因本次面板設計需求偷偷加入新工具、搜尋或資料夾。覆蓋式面板的「關閉面板」屬已核准的面板內控制項，不是第三個上方工具。
++F01–F08 加上 F11 為本版 Must 集合，面板是既有 Feature 的修訂而非額外不受控專案。收藏、使用者排序、自訂桌布仍不在本版；時鐘與五項唯讀資訊由 D8 納入 F11；不因本次面板設計需求偷偷加入新工具、搜尋或資料夾。覆蓋式面板的「關閉面板」屬已核准的面板內控制項，不是第三個上方工具。
+ 
+ ## 完成定義與停止條件
+ 
+-本次完成指五份原檔更新為 Specification Baseline v1.0、Change Log 與舊／新 ID 追溯完整、全部現行 Must AC 有 Scenario、計數重新計算且靜態檢查通過；**不代表產品測試通過**。
++本次完成指五份原檔更新為 Specification Baseline v1.1 待審草案、Change Log 與舊／新 ID 追溯完整、全部現行 Must AC 有 Scenario、計數重新計算且靜態檢查通過；**不代表產品測試通過**。
+ 
+-規格已核准；未來 MVP 完成仍須設計獲批准、TDD／程式審查及 G1–G7 各自證據，模擬器不代替 Xiaomi API 30 armeabi-v7a。指定服務身分映射與多入口選擇須完成 G3；未裝指定 App 是支援分支，mapping 未確認或漏查不是成功分支。F07 的明示降級已由 D5 接受，但仍須驗證降級行為，不可記為直接設定成功。
++v1.0 基線及 D8 範圍已核准；未來 MVP 完成仍須 v1.1 最終審核及完整設計獲批准、TDD／程式審查及 G1–G7 各自證據，模擬器不代替 Xiaomi API 30 armeabi-v7a。指定服務身分映射與多入口選擇須完成 G3；未裝指定 App 是支援分支，mapping 未確認或漏查不是成功分支。F07 的明示降級已由 D5 接受，但仍須驗證降級行為，不可記為直接設定成功。
+ 
+ G-HOME 不阻擋手動 MVP；所有系統變更仍另行批准。無原廠入口、實機 ABI 失敗、焦點陷阱、誤啟動背景首頁、原廠功能回歸或無法 rollback 都阻擋發布，不得用 root／停用原廠套件繞過。
+ 
+-完成本次修訂後停止，等待米勒下一步指示；不進 Stitch、程式開發、產品測試或任何裝置操作。
++完成本次修訂後停止，等待米勒審核 v1.1；不進 Stitch、程式開發、產品測試或任何裝置操作。

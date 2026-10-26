@@ -1,0 +1,200 @@
+--- v1.1-pending/03_BDD_GHERKIN_SCENARIOS.feature
++++ v1.1-approved/03_BDD_GHERKIN_SCENARIOS.feature
+@@ -1,10 +1,10 @@
+-# Status: Specification Baseline v1.1 — Home Information Enhancement
++# Status: Specification Baseline v1.1 — Approved for UI/UX Design
+ # 規格日期：2026-10-25 | Version: v1.1 | Product tests: Not Run
+ # Change Log: D1–D7 已確認；首頁固定服務＋更多 APP 覆蓋式面板。
+ # Approved Product Requirements: D1～D7、F02 單一主要入口及 F05 同一存活階段恢復面板／焦點。
+ # Approved Behavioral Baseline: SA-01～SA-07；Q1～Q5 Closed。
+ # Pending Technical Verification: mapping、API/ABI、OEM 生命週期、HOME。
+-# 首頁 A 視覺方向由使用者選定；v1.1 細化與完整設計對齊待審；Product Tests: Not Run。
++# 首頁 A 視覺方向由使用者選定；v1.1 需求與行為已核准；Pending Final UI/UX Design Review；Product Tests: Not Run。
+ # v1.1 Active 105：保留 v1.0 的 85，新增 F11 的 20（SC-095～SC-114）；Retired 9 不變。
+ # 歷史 0.1→0.2：新增 38、修改 35、沿用 12、Retired 9；本次不改這些歷史標籤。
+ # 此檔只含 Active 情境；舊 ID 歷史、原 AC 與替代對照見 04_REQUIREMENT_TRACEABILITY.md。
+@@ -12,8 +12,8 @@
+ # 根首頁指面板關閉；A/B/C 與 p.a/A 是非指定服務的合成 fixture，除非 Given 另述。
+ # YouTube/Netflix/Disney+ 的成功身分 fixture 假設核准映射存在；不是實機 mapping 證據。
+ # 真實三服務 package/component 均 TBD；沒有猜測套件名。
+-# 所有 AC、焦點序列與狀態定義以 02 為準；F01～F08 的 SA-07 預算已核准待實測；F11 的 P11-01 預算仍待審及實測。
+-# Review: Approved Change Request — Draft Pending v1.1 Final User Review。D8 範圍已核准。F11 全部情境為受控 fixture，不是 Xiaomi 資訊讀取證據。
++# 所有 AC、焦點序列與狀態定義以 02 為準；F01～F08 的 SA-07 預算已核准待實測；F11 的 P11-01 已核准為初始驗收目標、仍待實測。
++# Review: Approved Product Requirements / Approved Behavioral Baseline。D8 與 P11-01～P11-03 已核准（Approved／Closed）。F11 全部情境為受控 fixture，不是 Xiaomi 資訊讀取證據。
+ # F11 是既有狀態訊息的唯讀擴充；不改原 85 個情境的入口、工具、焦點、離線或安全行為。
+ # 不建立 step definitions，不執行產品測試；安裝與裝置動作需未來另行授權。
+ # SC-009: Replaced (Retired) -> SC-058, SC-063; 舊單一全 App 首頁改為指定 App 與面板兩個集合
+@@ -26,7 +26,7 @@
+ # SC-019: Replaced (Retired) -> SC-071, SC-088; 方向 repeat 必須按新版首頁／面板分開定義
+ # SC-041: Replaced (Retired) -> SC-077, SC-078; 最後 App 消失的焦點需按首頁／面板分開修復
+ 
+-@specification_baseline_v1_1 @pending_final_user_review @manual_entry @no_home_takeover
++@specification_baseline_v1_1 @approved_for_ui_ux_design @manual_entry @no_home_takeover
+ Feature: Xiaomi Google TV 指定影音首頁與更多 APP 覆蓋式面板
+   手動進入，HOME 保留原廠；面板是 Launcher 內部狀態，不要求系統 Overlay 特殊權限。
+   MiTV-MOOR0 API 30 armeabi-v7a 與 API 36 arm64-v8a 模擬器分別驗收，不能相互替代。
+@@ -582,33 +582,33 @@
+     Then 面板可用且沒有 SYSTEM_ALERT_WINDOW 請求或授權導頁；外部 App 前景不被面板覆蓋，HOME 預設未改
+ 
+ 
+-  # F11 本機時間與唯讀裝置資訊；D8 範圍已核准，細化草案待最終審核。
+-
+-  @F11 @AC-F11-01 @SC-095 @D8 @added_1_1 @draft_v1_1
++  # F11 本機時間與唯讀裝置資訊；D8 與細化行為已核准；技術驗證與 UI/UX 最終驗收尚未完成。
++
++  @F11 @AC-F11-01 @SC-095 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-095 — 時間日期依同一系統快照與格式呈現
+     Given 合成時間來源回傳同一有效快照 T，系統時區 Z、locale L、24 小時及日期格式 D 已固定；fixture 同時提供系統格式器對 T 的時間、日期與星期預期字串
+     When 首次讀取完成並呈現首頁資訊
+     Then 時間、日期與星期各與 fixture 的系統格式器預期字串一致且不顯示秒；沒有網路請求或修改系統時間，五項資訊標籤均保留
+ 
+-  @F11 @AC-F11-01 @SC-096 @D8 @added_1_1 @draft_v1_1 @proposed_budget
++  @F11 @AC-F11-01 @SC-096 @D8 @added_1_1 @approved_v1_1 @approved_initial_target
+   Scenario: SC-096 — 系統格式與時區變更同步重算
+     Given 合成時間快照 T 已顯示，來源由 24 小時改為 12 小時並更換時區與 locale；fixture 已提供新設定的時間、日期及星期預期字串
+     When 受控來源送出設定變更事件並立即提供同一 T 在新設定下的快照
+-    Then 依待審 P11-01 在事件後 1 秒內，三項字串皆符合新系統格式，包含 12 小時所需的日間時段標示，沒有保留舊時區日期或修改系統設定
+-
+-  @F11 @AC-F11-01 @SC-097 @D8 @added_1_1 @draft_v1_1 @proposed_budget
++    Then 依已核准 P11-01 在事件後 1 秒內，三項字串皆符合新系統格式，包含 12 小時所需的日間時段標示，沒有保留舊時區日期或修改系統設定
++
++  @F11 @AC-F11-01 @SC-097 @D8 @added_1_1 @approved_v1_1 @approved_initial_target
+   Scenario: SC-097 — 跨午夜時間日期星期一起更新
+     Given 受控系統時鐘固定在某本機日期的最後一分鐘，fixture 已指定下一日期與星期的格式器預期字串，資料可立即讀取
+     When 受控時鐘跨越本機午夜且排程器送出分鐘更新事件
+-    Then 依待審 P11-01 在 1 秒內顯示新分鐘、新日期與新星期；可觀察提交狀態不出現新時間配舊日期／星期
+-
+-  @F11 @AC-F11-01 @SC-098 @D8 @added_1_1 @draft_v1_1
++    Then 依已核准 P11-01 在 1 秒內顯示新分鐘、新日期與新星期；可觀察提交狀態不出現新時間配舊日期／星期
++
++  @F11 @AC-F11-01 @SC-098 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-098 — 時間來源失敗不得使用設計稿固定時間
+     Given 受控時間來源初始未完成，其他資訊來源有效；設計 fixture 另有不屬於資料來源的示意時間字串
+     When 先觀察未完成狀態，再令時間來源回報讀取失敗
+     Then 未完成時顯示時間未知及日期未知；失敗後時間與日期欄均顯示無法取得（讀取失敗），不顯示示意時間或推測星期，其他有效資訊保留
+ 
+-  @F11 @AC-F11-02 @SC-099 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-02 @SC-099 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-099 — 已知網路類型與名稱可部分降級
+     Given 受控預設網路來源確認 Wi-Fi 已連線且提供合成名稱 TEST-NET-A，未提供 Internet 可用證據
+     When 提交該有效快照
+@@ -618,37 +618,37 @@
+     When 再依序提交確認乙太網路連線及確認無預設網路的兩次有效快照
+     Then 分別顯示乙太網路已連線及無預設網路，不殘留 Wi-Fi 名稱，不推論 Wi-Fi 無線電開關狀態
+ 
+-  @F11 @AC-F11-02 @SC-100 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-02 @SC-100 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-100 — 網路未知與拒絕不能當成斷線
+     Given 受控網路來源尚未回傳任何有效狀態
+     When 先觀察初始狀態，再令來源回報存取被拒
+     Then 初始網路欄顯示狀態未知；拒絕後顯示無法取得（權限不足），兩階段均不顯示未連線、假名稱或權限授權提示
+ 
+-  @F11 @AC-F11-03 @SC-101 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-03 @SC-101 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-101 — HDMI 連接證據不等於目前輸入
+     Given 合成 HDMI 來源明示完整涵蓋 fixture 的兩個埠，TEST-HDMI-A 為已連接、TEST-HDMI-B 為未連接，沒有目前輸入或訊號證據
+     When 讀取成功並提交資訊
+     Then HDMI 連接狀態欄依來源列出兩個埠及各自連接狀態，不標為目前使用中或播放中，輸入源切換請求數為 0；本情境結果不構成 Xiaomi 實值證據
+ 
+-  @F11 @AC-F11-03 @SC-102 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-03 @SC-102 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-102 — HDMI 部分或空來源不冒充全部斷線
+     Given 合成 HDMI 來源只確認 TEST-HDMI-A 未連接並明示覆蓋範圍不完整
+     When 提交部分結果，再在下一讀取提交覆蓋範圍未知的空集合
+     Then 第一階段顯示 TEST-HDMI-A 未連接及部分資訊，不推測其他埠；第二階段顯示狀態未知，不顯示全部未連接或憑空補 HDMI 編號
+ 
+-  @F11 @AC-F11-03 @SC-103 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-03 @SC-103 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-103 — HDMI 無安全來源時保留欄位降級
+     Given 受控能力來源回報一般 APK 無受支援的 HDMI 資料來源，主要 App 清單有效
+     When 提交該能力結果
+     Then HDMI 連接狀態欄保留並顯示無法取得（不支援）；沒有敏感／特權授權要求、設定導頁或切換輸入請求，更多 APP 仍可開啟
+ 
+-  @F11 @AC-F11-04 @SC-104 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-04 @SC-104 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-104 — 儲存容量具有明確單位及磁碟範圍
+     Given 合成來源回傳 Launcher 所在本機資料磁碟同一快照：總量 32000000000 bytes、可用量 12000000000 bytes；另有 USB／NAS fixture 但不屬於此來源
+-    When 依待審 P11-03 呈現容量
++    When 依已核准 P11-03 呈現容量
+     Then 標籤為本機資料磁碟（Launcher 所在），顯示可用 12.0 GB／總計 32.0 GB 並可見 1 GB = 1,000,000,000 bytes 的單位說明；不合計 USB／NAS、不標為硬體容量或 App 配額
+ 
+-  @F11 @AC-F11-04 @SC-105 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-04 @SC-105 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-105 — 儲存零值小值及非法數值可辨識
+     Given 受控容量來源每次皆回傳總量 32000000000 bytes；測試序列的可用量為 0、50000000、-1、33000000000 bytes
+     When 依序完成四次獨立讀取，每次觀察完成後畫面
+@@ -656,31 +656,31 @@
+     When 再提交總量 0 bytes、可用量 0 bytes 的快照
+     Then 顯示無法取得（資料無效），不顯示正常 0.0 GB 磁碟
+ 
+-  @F11 @AC-F11-04 @SC-106 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-04 @SC-106 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-106 — 儲存缺值及讀取失敗不假造容量
+     Given 受控儲存來源在一次完成結果缺少可用量，其他資訊來源有效
+     When 呈現缺值結果，下一次讀取再回報明確錯誤
+     Then 缺值時儲存欄為狀態未知；錯誤後為無法取得（讀取失敗），不沿用其他快照容量或設計稿數字，其他資訊不被清除
+ 
+-  @F11 @AC-F11-05 @SC-107 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-05 @SC-107 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-107 — 資訊區不加入既有方向鍵焦點序列
+     Given 首頁 H 為 YouTube、Netflix、Disney+，Netflix 聚焦，最後工具為重新整理；五個資訊項分別含正常、未知與不可用狀態且可識別
+     When 依序按下並放開 Right、Right、Up、Right、Down，每次觀察焦點
+     Then 唯一焦點依序為 Disney+、更多 APP、重新整理、系統設定、更多 APP；五個資訊項從未取得焦點，焦點圖沒有新增節點或 App 啟動請求
+ 
+-  @F11 @AC-F11-05 @SC-108 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-05 @SC-108 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-108 — 資訊區啟用事件不導頁不改設定
+     Given 首頁更多 APP 聚焦，受控 UI fixture 可識別五項資訊區但不強制改焦點；初始設定開啟、App 啟動、網路變更、HDMI 切換與權限請求計數皆為 0
+     When 經 UI 事件派送向五個資訊項逐一送出一次 Click 啟用事件，不直接呼叫功能；不能接收事件的項目記為拒絕而不轉送
+     Then 每次後全部請求計數仍為 0、更多 APP 仍唯一聚焦、面板未開啟；資訊項沒有新操作畫面或啟用動作
+ 
+-  @F11 @AC-F11-06 @SC-109 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-06 @SC-109 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-109 — 首頁資訊更新不搶 App 焦點
+     Given 首頁 Netflix stable key 為唯一焦點，H/O 快照 V1、App 顯示位置與可見區已記錄；沒有 App 查詢或按鍵事件
+     When 受控資訊來源依序提交有效時間／日期、網路失敗、HDMI 更新及儲存更新結果
+     Then 每次提交後 Netflix stable key 仍唯一聚焦，Home 層、H/O V1、App 可見區均不變，面板沒有自動開啟；只有相應資訊欄位更新
+ 
+-  @F11 @AC-F11-06 @SC-110 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-06 @SC-110 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-110 — 面板資訊更新不改焦點與開關狀態
+     Given 面板 O 為 A、B，B 為唯一焦點且其可見區已記錄，H/O 為 V1；受控資訊來源將同時提供時間、網路、HDMI 與儲存的新結果
+     When 在面板開啟時提交資訊結果，不輸入按鍵
+@@ -688,7 +688,7 @@
+     When 使用者另按一次 Back 關閉面板
+     Then 更多 APP 唯一聚焦，首頁資訊顯示此次有效結果或各欄降級狀態，不為更新而重開面板
+ 
+-  @F11 @AC-F11-06 @SC-111 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-06 @SC-111 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-111 — 資訊來源全部失敗仍可使用主要入口
+     Given 所有資訊來源受控為讀取失敗，H/O 有效，H 有 YouTube、O 有 A，更多 APP 聚焦；App A 與系統設定有會顯示可辨識畫面的受控目標
+     When 提交資訊失敗後在更多 APP 按 OK
+@@ -698,23 +698,23 @@
+     When 按 Back 關閉面板、Up 到重新整理並按 OK，取得成功 App 快照後按 Right 到系統設定再按 OK
+     Then 重新整理查詢完成且系統設定受控畫面出現；上述過程不出現資訊授權提示，F06 不等待或觸發資訊讀取
+ 
+-  @F11 @AC-F11-07 @SC-112 @D8 @added_1_1 @draft_v1_1 @proposed_budget
++  @F11 @AC-F11-07 @SC-112 @D8 @added_1_1 @approved_v1_1 @approved_initial_target
+   Scenario: SC-112 — 逾時與舊回應不冒充目前資訊
+-    Given 網路欄已有合成 TEST-NET-A，受控排程器在 t=0 開始新查詢 Q1；Q1 到第 6 秒才回傳，採待審 P11-01 的 5 秒期限
++    Given 網路欄已有合成 TEST-NET-A，受控排程器在 t=0 開始新查詢 Q1；Q1 到第 6 秒才回傳，採已核准 P11-01 的 5 秒期限
+     When 開始 Q1 並觀察 t=0、t=5 秒，再在 t=6 秒送達 Q1 舊值
+     Then t=0 顯示狀態未知而不顯示 TEST-NET-A 為目前值；t=5 秒判定逾時並於顯示預算內顯示無法取得（逾時）；Q1 晚到不恢復舊名稱
+     When 下一合法讀取 Q2 回傳確認乙太網路已連線
+     Then 顯示乙太網路已連線並清除該欄逾時，其他有效欄位不受影響
+ 
+-  @F11 @AC-F11-07 @SC-113 @D8 @added_1_1 @draft_v1_1 @proposed_budget
++  @F11 @AC-F11-07 @SC-113 @D8 @added_1_1 @approved_v1_1 @approved_initial_target
+   Scenario: SC-113 — 前景週期與恢復補償不建立背景輪詢
+-    Given 受控排程器採待審 P11-01，t=0 四個來源均已完成一次讀取；來源後續可立即回傳，沒有變更事件或 resume
++    Given 受控排程器採已核准 P11-01，t=0 四個來源均已完成一次讀取；來源後續可立即回傳，沒有變更事件或 resume
+     When 前景推進至 t=30 秒，再至 t=60 秒
+     Then 網路分別在 30 及 60 秒開始重讀；HDMI 與儲存於 30 秒無新增讀取而於 60 秒各重讀一次；同欄有效查詢不重疊
+     When 轉入背景並推進 120 秒，再返回同一存活操作階段
+     Then 背景期間沒有週期讀取；resume 對資訊重新讀取，舊值先標未知再呈現新結果，操作層與焦點依原 F05 保留
+ 
+-  @F11 @AC-F11-07 @SC-114 @D8 @added_1_1 @draft_v1_1
++  @F11 @AC-F11-07 @SC-114 @D8 @added_1_1 @approved_v1_1
+   Scenario: SC-114 — 正式資料缺失不能由示意資料補值
+     Given 受控整合環境選用正式資料路徑，所有本機資訊讀取均回報不支援；測試資源另含明示示意的時間、SSID、HDMI 及容量字串
+     When 手動開啟首頁並檢視資訊畫面與資料來源記錄

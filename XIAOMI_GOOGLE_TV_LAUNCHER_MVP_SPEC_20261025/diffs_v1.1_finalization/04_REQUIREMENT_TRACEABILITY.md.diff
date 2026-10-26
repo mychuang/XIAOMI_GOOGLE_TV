@@ -1,0 +1,101 @@
+--- v1.1-pending/04_REQUIREMENT_TRACEABILITY.md
++++ v1.1-approved/04_REQUIREMENT_TRACEABILITY.md
+@@ -1,21 +1,23 @@
+ # 04｜Requirement Traceability and Revision Review
+ 
+-**Status: Specification Baseline v1.1 — Home Information Enhancement**  
++**Status: Specification Baseline v1.1 — Approved for UI/UX Design**  
+ **規格日期：2026-10-25｜版本：v1.1｜產品測試狀態：Not Run**
+ 
+ ## v1.1 受控變更與核准界線
+ 
+-**審核狀態：Approved Change Request — Draft Pending v1.1 Final User Review**
++**審核狀態：Approved Product Requirements / Approved Behavioral Baseline**
+ 
+ - **D8 已核准的變更範圍**：採 Google Stitch 第一張「首頁 A」為正式視覺方向；首頁保留本機時間、日期與星期、Wi-Fi／網路、HDMI、本機儲存五項唯讀資訊，不新增焦點或操作。
+ - **既有已核准基線**：F01～F08 的 AC 與原 85 個 Active Scenario 行為不變；SA-01～SA-07 與 Q1～Q5 Closed 保留。D4 僅「時鐘／資訊排除」由 D8 修訂，其餘限制不變。
+-- **待最終審核**：v1.1 整份文件、F11 AC／BDD 細化及 P11-01～P11-03 建議細節尚待審核；D8 已核准不等於所有衍生規則已核准。
++- **Approved Product Requirements**：D1～D8 與 v1.1 MVP AC／BDD 已核准；F11 維持 Must Have。
++- **Approved Behavioral Baseline**：SA-01～SA-07 保留；P11-01～P11-03 全部 Approved／Closed。所有效能數字仍是初始驗收目標，需實機測量。
++- **Pending Final UI/UX Design Review**：首頁 A 方向已選定，不表示完整 UI/UX 已驗收；最終畫面、焦點及錯誤／降級狀態對齊仍待審核。
+ - **設計證據**：首頁 A 選擇依本次使用者陳述記錄；本次未操作 Stitch 或檢視其圖稿，未取得可鎖版的畫面 ID／匯出版本，不能據此宣稱全部畫面、焦點及錯誤狀態設計已核准。
+ - **Pending Technical Verification / Product Tests: Not Run**：一般 APK 可讀資訊及 Xiaomi 真實行為均待驗證；受控 fixture 不是裝置證據。手動啟動及獨立 G-HOME 不變。
+ 
+ ### Change Log — v1.0 → v1.1
+ 
+-F11 由 Should 升為 Must「本機時間與唯讀裝置資訊」；修訂 AC-F11-01，追加 F11 AC 及從 SC-095 起的新情境。F01 只補資訊顯示範圍，工具仍恰為重新整理／系統設定。F11 不加入 F06 的 App 清單查詢或焦點狀態；資訊失敗只在本欄降級。詳細 ID 與計數見 04。以下 v1.0 及更早的核准／Change Log 只記錄當時狀態，不代表 v1.1 已最終核准。
++F11 由 Should 升為 Must「本機時間與唯讀裝置資訊」；修訂 AC-F11-01，追加 F11 AC 及從 SC-095 起的新情境。F01 只補資訊顯示範圍，工具仍恰為重新整理／系統設定。F11 不加入 F06 的 App 清單查詢或焦點狀態；資訊失敗只在本欄降級。詳細 ID 與計數見 04。本次定稿只更新核准狀態，不修改行為、數值或 ID。以下 v1.0 及更早的核准／Change Log 保留當時狀態；現行核准狀態以本節為準，不代表技術或設計驗收通過。
+ 
+ ## 歷史核准紀錄（Draft 0.2 → v1.0）
+ 
+@@ -38,7 +40,7 @@
+ 
+ ## v1.1 現行統計與 v1.0 → v1.1 變更
+ 
+-| 項目 | v1.0 歷史 | v1.1 現行草案 |
++| 項目 | v1.0 歷史 | v1.1 現行已核准基線 |
+ |---|---:|---:|
+ | Feature 總數 | 16 | 16 |
+ | Must Feature | 8 | 9（F01～F08、F11） |
+@@ -51,9 +53,9 @@
+ | Scenario Outline／Examples | 0／0 | 0／0 |
+ | 產品測試 | Not Run | Not Run |
+ 
+-- D8：首頁 A 及五項唯讀資訊的範圍已核准；以下細化為待 v1.1 最終審核草案。
++- D8：首頁 A 及五項唯讀資訊的範圍已核准；以下細化／AC／BDD 亦已核准。
+ - F01～F08：35 個 AC、85 個原 Active Scenario 的原文／ID／標籤／主要追溯全數保留；F01 只補充唯讀狀態資訊的顯示範圍，不增可互動工具。
+-- F11：Should → Must；更名為「本機時間與唯讀裝置資訊」。AC-F11-01 保留同一時間責任 ID，但由候選改為本版時間／日期／星期／系統格式需求；原候選「下一分鐘內」改由待審 P11-01 明定預算，不冒稱原已核准。新增 AC-F11-02～AC-F11-07，共 7 個 F11 Must AC。
++- F11：Should → Must；更名為「本機時間與唯讀裝置資訊」。AC-F11-01 保留同一時間責任 ID，但由候選改為本版時間／日期／星期／系統格式需求；原候選「下一分鐘內」改由已核准 P11-01 明定預算，此為本次 v1.1 核准，不回溯冒稱原候選已核准。新增 AC-F11-02～AC-F11-07，共 7 個 F11 Must AC。
+ - 新增 20 個 Scenario：SC-095～SC-114；原 85 個沒有新增修改或退役，原 9 個 Retired 不復用，無新增退役 AC。
+ - 本次 AC 差異：42 個原 AC 原文不變、1 個修訂（AC-F11-01）、6 個新增；F11 原候選 AC 移入 Must，不重複計數。
+ - 原 85 列的 Revision 欄與 Scenario 的 0.1／0.2 tags 仍指原歷史遷移；本次全部 Unchanged from v1.0。F11 的 Added v1.1 才是本次新增。
+@@ -70,7 +72,7 @@
+ | D8 | F11 / Must Have | AC-F11-06 | 更新不改焦點與主要操作 | SC-109, SC-110, SC-111 |
+ | D8 | F11 / Must Have | AC-F11-07 | 分欄狀態、更新與真實資料界線 | SC-112, SC-113, SC-114 |
+ 
+-F11 新 AC 與情境皆適用 P11-01～P11-03 待審細化；未來測試需記錄該次採用的已核准預算。低層 fixture 證明呈現及降級規則，不證明 Xiaomi 有 HDMI／SSID 等真實讀取能力。G6 必須另存來源、權限、裝置與實值或不可用原因。既有 F08 相容性情境不改文；v1.1 發布另需 F11 在兩目標的資料來源與降級證據，不以 SC-046 的原範圍遺漏 F11。
++F11 新 AC 與情境皆適用 P11-01～P11-03 已核准細化；未來測試需記錄該次採用的已核准預算。低層 fixture 證明呈現及降級規則，不證明 Xiaomi 有 HDMI／SSID 等真實讀取能力。G6 必須另存來源、權限、裝置與實值或不可用原因。既有 F08 相容性情境不改文；v1.1 發布另需 F11 在兩目標的資料來源與降級證據，不以 SC-046 的原範圍遺漏 F11。
+ 
+ ## 歷史 v1.0 靜態複核統計（非 v1.1 現行數量）
+ 
+@@ -458,6 +460,14 @@
+ F09、F10、F12～F16 的 AC 是未來納入條件或範圍約束；F11 已由 D8 納入 Must，不屬此排除集合。因此上述非 MVP AC 本次不產生對應功能 Scenario，也不列為 Must 覆蓋缺口。Won't 中的安全／排除邊界已有 F01、F02、F08 的 Must 情境支撐。若任何項目升為 Must，必須先新增 AC／BDD／本表，再取得範圍核准。
+ 
+ 
++### v1.1 本次定稿核對
++
++本次僅將 D8／P11 的核准狀態、F11 狀態標籤及「待審 P11」引用改為已核准；沒有新增、刪除或重新設計 AC／Scenario。保留 v1.0→v1.1 的歷史新增／修改紀錄，不把歷史差異誤認為本次變更。
++
++實際重算：9 個 Must Feature、42 個 Must AC、105 個唯一 Active Scenario、9 個 Retired；F11 為 7 個 AC／20 個 Scenario，雙向追溯完整。原有 85 個 Scenario 記錄逐項完全相同；全部 105 個 Scenario 與 49 個 AC 在僅正規化核准狀態文字後完全相同，數值、輸入與可觀察結果未改。
++
++Gherkin 使用既有有限語法結構檢查（含多階段 When／Then）；未安裝官方 parser，未執行產品測試。Feature 狀態標籤已改為 approved_for_ui_ux_design；F11 狀態標籤為 approved_v1_1／approved_initial_target，Feature／AC／Scenario／D8 ID 與歷史 revision tags 保留。未發現需要更改行為的明確矛盾。
++
+ ### v1.1 靜態檢查結果
+ 
+ - 重新解析文件：16 Feature；9 Must（F01～F08、F11）；42 Must AC 全覆蓋，49 全部 AC；105 個唯一 Active Scenario；9 個 Retired，替代 ID 均有效。
+@@ -465,8 +475,8 @@
+ - 唯一修訂的既有 AC 為 AC-F11-01；新增 AC-F11-02～07 與 SC-095～114。F11 全部新情境含 @D8、@F11 及唯一 AC／Scenario tags。
+ - Active 表與 Gherkin 三元組／標題完全相符；42 列反向 AC 覆蓋與正向對應相同；Markdown 表格欄數一致。
+ - Gherkin 檢查只涵蓋本檔使用的 Feature／Scenario／tags／Given–When–Then／And 多階段結構，不是官方 Cucumber parser 驗證，不建立或執行 step definitions。
+-- 語意複核：D4 時鐘排除僅作歷史，D8 不新增操作；正常否定值與未知／不可用分開；資訊刷新不影響 F06／F05；HDMI 讀取與切換分開；P11 預算明列待審；降級不是實值能力證據。
+-- 本次為文件靜態檢查，產品測試與裝置能力驗證仍 Not Run；不是 v1.1 最終核准。
++- 語意複核：D4 時鐘排除僅作歷史，D8 不新增操作；正常否定值與未知／不可用分開；資訊刷新不影響 F06／F05；HDMI 讀取與切換分開；P11 預算已核准為初始驗收目標，仍待實機測量；降級不是實值能力證據。
++- 本次為文件靜態檢查，產品測試與裝置能力驗證仍 Not Run；核准來自使用者明確決策，而非本靜態檢查。
+ 
+ ## 靜態一致性檢查與語意複核
+ 
+@@ -474,11 +484,11 @@
+ 
+ - Feature／AC／Active Scenario 定義唯一；所有 Active 的主要 AC 屬於其 Feature；全部 Must AC 至少一個 Active Scenario。
+ - 03 的 tag／標題 ID 與 04 Active 三元組完全相同；原 56 個 ID 全部有處置，Replaced 不出現在 Active 宣告且每個替代 ID 存在。
+-- 0.2 歷史新情境從 SC-057 追加；本次 v1.1 從 SC-095 追加，不重用舊 ID；D8 已核准範圍、P11 待審細化與技術未知分開。
+-- 五文件均為 Specification Baseline v1.1 — Home Information Enhancement，屬已核准需求變更的草案、等待 v1.1 最終審核；產品結果維持 Not Run。重新計算數量，舊 56 僅留在歷史欄位。
++- 0.2 歷史新情境從 SC-057 追加；本次 v1.1 從 SC-095 追加，不重用舊 ID；D8 已核准範圍、P11 已核准細化與技術未知分開。
++- 五文件均為 Specification Baseline v1.1 — Approved for UI/UX Design，產品需求與行為已核准，UI/UX 最終驗收仍 Pending；產品結果維持 Not Run。重新計算數量，舊 56 僅留在歷史欄位。
+ - 01 的環境基線與原安全流程保留；G0–G7、G-HOME 仍在 05；F15 未因已確認未來高優先級而擅自變成 MVP。
+ - 新首頁不再套用 C 欄網格；面板開啟時無背景焦點／操作；H 空與 O 空、查詢 error 與成功 empty 分開；覆蓋式面板與系統 Overlay 權限分開。
+ - 映射未確認不宣稱未安裝，指定服務全部入口抑制政策與未知映射降級列 SA-04；不臆造真實 package/component。
+ - Back 階層、repeat 消費、資料原子提交、來源層恢復與晚回呼不重開面板均有可觀察情境。
+ 
+-v1.0 產品需求／行為基線及 D8 範圍已由使用者核准；F11 細化仍待 v1.1 最終審核。本次靜態檢查不等於 Android 相容性或產品測試通過。Q1～Q5 Closed；SA-01～SA-07 Approved Behavioral Baseline；實際 mapping 與 G1～G7／G-HOME 仍 Not Run／Not Verified。G0 的 v1.0 規格已核准；D8 首頁 A 方向與資訊範圍已核准，但 v1.1 最終規格及完整設計對齊仍 Pending。完成後停止，等待 v1.1 審核。
++v1.0 產品需求／行為基線及 D8 範圍已由使用者核准；F11 細化已核准。本次靜態檢查不等於 Android 相容性或產品測試通過。Q1～Q5 Closed；SA-01～SA-07 Approved Behavioral Baseline；實際 mapping 與 G1～G7／G-HOME 仍 Not Run／Not Verified。G0 的 v1.0 規格已核准；D8 首頁 A 方向與資訊範圍已核准，v1.1 規格已核准，完整設計對齊及最終 UI/UX 審核仍 Pending。完成後停止，等待下一步指示。

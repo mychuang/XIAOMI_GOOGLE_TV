@@ -1,0 +1,25 @@
+# Local tools, caches and generated outputs
+.gradle/
+.gradle-user-home/
+.android-sdk/
+.tooling/
+.kotlin/
+**/build/
+.idea/
+*.iml
+local.properties
+.DS_Store
+.env
+.env.*
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+*.apk
+*.aab
+# Explicit design-source allowlist; drafts remain on disk
+/stitch_minimalist_google_tv_launcher_design/*
+!/stitch_minimalist_google_tv_launcher_design/ten_foot_celestial_glass/
+/stitch_minimalist_google_tv_launcher_design/ten_foot_celestial_glass/*
+!/stitch_minimalist_google_tv_launcher_design/ten_foot_celestial_glass/DESIGN.md
