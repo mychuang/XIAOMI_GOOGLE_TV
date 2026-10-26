@@ -233,6 +233,15 @@ class HomeFocusViewBinder(
         const val DEFAULT_SCALE = 1.0f
     }
 
+    private var appLabels: Map<String, String> = emptyMap()
+
+    /**
+     * Updates user-readable application labels discovered by the scanner.
+     */
+    fun updateAppLabels(labels: Map<String, String>) {
+        this.appLabels = labels
+    }
+
     /**
      * Updates the horizontal Home App row to display 0..3 designated apps followed by More Apps.
      * Guaranteed fixed order: YouTube -> Netflix -> Disney+ -> More Apps.
@@ -265,14 +274,15 @@ class HomeFocusViewBinder(
     }
 
     /**
-     * Synchronizes O App items inside the Drawer overlay with focus highlights.
+     * Synchronizes O App items inside the Drawer overlay with focus highlights and readable labels.
      */
     fun bindDrawerApps(drawerApps: List<FocusNode.Drawer.App>, currentFocus: FocusNode) {
         val items = drawerApps.map { app ->
             val isSelected = currentFocus == app
+            val label = appLabels[app.componentKey] ?: app.componentKey.substringAfterLast('/')
             DrawerAppItemUiState(
                 componentKey = app.componentKey,
-                displayName = app.componentKey.substringAfterLast('/'),
+                displayName = label,
                 isSelected = isSelected,
                 scale = if (isSelected) FOCUSED_SCALE else DEFAULT_SCALE
             )

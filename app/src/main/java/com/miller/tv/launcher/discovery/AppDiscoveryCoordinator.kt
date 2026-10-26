@@ -70,6 +70,10 @@ class AppDiscoveryCoordinator(
         stateMachine.onSnapshotLoaded(hNodes)
         stateMachine.onDrawerSnapshotLoaded(oNodes)
 
+        // Propagate user-readable application labels
+        val labels = (snapshot.hApps + snapshot.oApps).associate { it.componentKey to it.displayName }
+        viewBinder?.updateAppLabels(labels)
+
         // Sync view binder
         viewBinder?.syncState(stateMachine.state)
         return true

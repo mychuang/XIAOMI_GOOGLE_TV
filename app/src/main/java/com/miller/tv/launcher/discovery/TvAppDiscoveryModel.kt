@@ -65,7 +65,7 @@ data class AppSnapshot(
  */
 class TvAppCategorizer(
     private val ownPackageName: String = "com.miller.tv.launcher",
-    private val mappings: Map<DesignatedService, DesignatedServiceMapping> = emptyMap()
+    private val mappings: Map<DesignatedService, DesignatedServiceMapping> = DEFAULT_DESIGNATED_MAPPINGS
 ) {
     companion object {
         /**
@@ -76,6 +76,54 @@ class TvAppCategorizer(
             "com.google.android.apps.tv.launcherx",
             "com.google.android.tungsten.setupwraith",
             "com.android.tv.settings"
+        )
+
+        /**
+         * Verified official Leanback launcher component mappings for designated services.
+         * Enforces strict package/component identity; never guesses by app display name (AC-F02-05).
+         */
+        val DEFAULT_DESIGNATED_MAPPINGS: Map<DesignatedService, DesignatedServiceMapping> = mapOf(
+            DesignatedService.YOUTUBE to DesignatedServiceMapping(
+                service = DesignatedService.YOUTUBE,
+                status = MappingStatus.VERIFIED,
+                primaryCandidates = listOf(
+                    "com.google.android.youtube.tv/com.google.android.apps.youtube.tv.activity.ShellActivity",
+                    "com.google.android.youtube.tv/com.google.android.youtube.tv.MainActivity",
+                    "com.google.android.youtube.tv/.MainActivity"
+                ),
+                allKnownEntries = setOf(
+                    "com.google.android.youtube.tv/com.google.android.apps.youtube.tv.activity.ShellActivity",
+                    "com.google.android.youtube.tv/com.google.android.youtube.tv.MainActivity",
+                    "com.google.android.youtube.tv/.MainActivity",
+                    "com.google.android.youtube.tv/com.google.android.apps.youtube.tv.activity.TvGuideActivity"
+                )
+            ),
+            DesignatedService.NETFLIX to DesignatedServiceMapping(
+                service = DesignatedService.NETFLIX,
+                status = MappingStatus.VERIFIED,
+                primaryCandidates = listOf(
+                    "com.netflix.ninja/com.netflix.ninja.MainActivity",
+                    "com.netflix.ninja/.MainActivity"
+                ),
+                allKnownEntries = setOf(
+                    "com.netflix.ninja/com.netflix.ninja.MainActivity",
+                    "com.netflix.ninja/.MainActivity"
+                )
+            ),
+            DesignatedService.DISNEY_PLUS to DesignatedServiceMapping(
+                service = DesignatedService.DISNEY_PLUS,
+                status = MappingStatus.VERIFIED,
+                primaryCandidates = listOf(
+                    "com.disney.disneyplus/com.bamtechmedia.dominguez.main.MainActivity",
+                    "com.disney.disneyplus/com.disney.disneyplus.MainActivity",
+                    "com.disney.disneyplus/.MainActivity"
+                ),
+                allKnownEntries = setOf(
+                    "com.disney.disneyplus/com.bamtechmedia.dominguez.main.MainActivity",
+                    "com.disney.disneyplus/com.disney.disneyplus.MainActivity",
+                    "com.disney.disneyplus/.MainActivity"
+                )
+            )
         )
 
         /**

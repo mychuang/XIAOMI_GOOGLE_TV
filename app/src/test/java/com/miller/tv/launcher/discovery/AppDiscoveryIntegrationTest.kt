@@ -316,4 +316,92 @@ class AppDiscoveryIntegrationTest {
         val accepted = coordinator.onSnapshotArrived(snapshot)
         assertFalse("Destroyed coordinator must reject snapshot updates", accepted)
     }
+
+    // 12. 預設 TvAppCategorizer 必須包含官方映射，真實 YouTube Component 進入 H 且自 O 排除
+    @Test
+    fun testDefaultCategorizerRecognizesOfficialYouTubeIntoH() {
+        val defaultCategorizer = TvAppCategorizer()
+        val ytActivity = DiscoveredActivity(
+            packageName = "com.google.android.youtube.tv",
+            activityName = "com.google.android.apps.youtube.tv.activity.ShellActivity",
+            rawLabel = "YouTube"
+        )
+        val otherActivity = DiscoveredActivity(
+            packageName = "com.android.vending",
+            activityName = "com.google.android.finsky.tvmainactivity.TvMainActivity",
+            rawLabel = "Google Play 商店"
+        )
+
+        val snapshot = defaultCategorizer.categorize(listOf(ytActivity, otherActivity))
+
+        assertEquals("YouTube must be in H", 1, snapshot.hApps.size)
+        assertEquals(DesignatedService.YOUTUBE, snapshot.hApps[0].service)
+        assertEquals("YouTube", snapshot.hApps[0].displayName)
+
+        assertEquals("O must only contain non-designated apps", 1, snapshot.oApps.size)
+        assertEquals("com.android.vending/com.google.android.finsky.tvmainactivity.TvMainActivity", snapshot.oApps[0].componentKey)
+        assertFalse("YouTube must be excluded from O", snapshot.oApps.any { it.packageName == "com.google.android.youtube.tv" })
+    }
+
+    // 13. Display Name 偽裝不會造成錯誤分類 (不以名稱判定服務)
+    @Test
+    fun testDisplayNameSpoofingRejectedFromH() {
+        val defaultCategorizer = TvAppCategorizer()
+        val fakeYt = DiscoveredActivity(
+            packageName = "com.malicious.fake",
+            activityName = "FakeActivity",
+            rawLabel = "YouTube" // 顯示名稱假冒 YouTube
+        )
+
+        val snapshot = defaultCategorizer.categorize(listOf(fakeYt))
+
+        assertTrue("Fake YouTube must not be placed in H", snapshot.hApps.isEmpty())
+        assertEquals("Fake app must be in O", 1, snapshot.oApps.size)
+    }
+
+    // 14. App Label 正確傳遞至 UI (Drawer 項目顯示真實 Label 而非 Component Key)
+    @Test
+    fun testAppLabelPropagatesToDrawerUi() {
+        val oApp = DiscoveredTvApp(
+            componentKey = "com.google.android.play.games/com.google.android.apps.play.games.app.atv.features.home.HomeActivity",
+            displayName = "Play 遊戲",
+            packageName = "com.google.android.play.games",
+            service = null
+        )
+        val snapshot = AppSnapshot(1L, emptyList(), listOf(oApp))
+        val scanner = FakeTvAppScanner(Result.success(snapshot))
+        val target = TestIntegrationTarget()
+        val stateMachine = HomeFocusStateMachine()
+        val binder = HomeFocusViewBinder(target)
+        val coordinator = AppDiscoveryCoordinator(scanner, FakeAppLauncher(), stateMachine, binder)
+
+        coordinator.refresh()
+
+        assertEquals(1, target.drawerAppItems.size)
+        assertEquals("Play 遊戲", target.drawerAppItems[0].displayName)
+    }
+
+    // 15. 預設 mappings 支援官方 Netflix 與 Disney+ Leanback 入口
+    @Test
+    fun testDefaultCategorizerRecognizesOfficialNetflixAndDisneyPlus() {
+        val defaultCategorizer = TvAppCategorizer()
+        val nfActivity = DiscoveredActivity(
+            packageName = "com.netflix.ninja",
+            activityName = "com.netflix.ninja.MainActivity",
+            rawLabel = "Netflix"
+        )
+        val dpActivity = DiscoveredActivity(
+            packageName = "com.disney.disneyplus",
+            activityName = "com.bamtechmedia.dominguez.main.MainActivity",
+            rawLabel = "Disney+"
+        )
+
+        val snapshot = defaultCategorizer.categorize(listOf(dpActivity, nfActivity))
+
+        assertEquals("Both apps should be in H", 2, snapshot.hApps.size)
+        // Fixed order: Netflix before Disney+
+        assertEquals(DesignatedService.NETFLIX, snapshot.hApps[0].service)
+        assertEquals(DesignatedService.DISNEY_PLUS, snapshot.hApps[1].service)
+        assertTrue("O must be empty", snapshot.oApps.isEmpty())
+    }
 }
