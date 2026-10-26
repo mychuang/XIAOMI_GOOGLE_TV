@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Ten-Foot Celestial Glass Layout Dimensions -->
+    <dimen name="margin_safe_x">96dp</dimen>
+    <dimen name="margin_safe_y">54dp</dimen>
+    <dimen name="gutter_home_row">28dp</dimen>
+    <dimen name="app_card_size">180dp</dimen>
+    <dimen name="app_card_corner">16dp</dimen>
+    <dimen name="drawer_width">480dp</dimen>
+</resources>

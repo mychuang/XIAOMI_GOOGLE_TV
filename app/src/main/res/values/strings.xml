@@ -3,4 +3,25 @@
     <string name="bootstrap_message">Miller TV Launcher
 Stage 1 · 開發基底
 尚未實作 MVP 首頁</string>
+
+    <!-- Tools -->
+    <string name="tool_refresh">重新整理</string>
+    <string name="tool_settings">系統設定</string>
+
+    <!-- Designated Apps & More Apps -->
+    <string name="app_name_youtube">YouTube</string>
+    <string name="app_name_netflix">Netflix</string>
+    <string name="app_name_disney_plus">Disney+</string>
+    <string name="more_apps">更多 APP</string>
+
+    <!-- Drawer -->
+    <string name="drawer_close">關閉面板</string>
+
+    <!-- F11 Placeholders (Non-interactive) -->
+    <string name="f11_placeholder_time">--:--</string>
+    <string name="f11_placeholder_date">--月--日 星期-</string>
+    <string name="f11_placeholder_network">網路狀態: 狀態未知</string>
+    <string name="f11_placeholder_hdmi">HDMI: 狀態未知</string>
+    <string name="f11_placeholder_storage">儲存空間: 狀態未知</string>
+    <string name="bullet_separator">•</string>
 </resources>

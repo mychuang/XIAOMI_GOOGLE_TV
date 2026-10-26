@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Celestial Glass Design Tokens -->
+    <color name="bg_surface">#10131A</color>
+    <color name="glass_card_bg">#B8161C28</color> <!-- rgba(22, 28, 40, 0.72) -->
+    <color name="text_on_surface">#E0E2EB</color>
+    <color name="text_on_surface_variant">#BAC9CC</color>
+    <color name="text_focused">#FFFFFF</color>
+    <color name="accent_primary">#00E5FF</color>
+    <color name="focus_white">#FFFFFF</color>
+</resources>

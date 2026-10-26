@@ -1,9 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="32dp">
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_gravity="center" android:gravity="center"
-        android:text="@string/bootstrap_message" android:textColor="#E0E2EB"
-        android:textSize="24sp" />
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_surface"
+    android:paddingLeft="@dimen/margin_safe_x"
+    android:paddingTop="@dimen/margin_safe_y"
+    android:paddingRight="@dimen/margin_safe_x"
+    android:paddingBottom="@dimen/margin_safe_y">
+
+    <!-- Top Row: Info (Left) and Tools (Right) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="top">
+
+        <!-- Top-Left: Read-only Device Information (F11 Placeholders, non-interactive) -->
+        <LinearLayout
+            android:id="@+id/infoContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:focusable="false">
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/f11_placeholder_time"
+                android:textColor="@color/text_on_surface"
+                android:textSize="48sp"
+                android:textStyle="bold"
+                android:focusable="false" />
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/f11_placeholder_date"
+                android:textColor="@color/text_on_surface_variant"
+                android:textSize="18sp"
+                android:focusable="false" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                android:focusable="false">
+
+                <TextView
+                    android:id="@+id/tvNetwork"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/f11_placeholder_network"
+                    android:textColor="@color/text_on_surface_variant"
+                    android:textSize="14sp"
+                    android:focusable="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/bullet_separator"
+                    android:textColor="@color/text_on_surface_variant"
+                    android:textSize="14sp"
+                    android:focusable="false" />
+
+                <TextView
+                    android:id="@+id/tvHdmi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/f11_placeholder_hdmi"
+                    android:textColor="@color/text_on_surface_variant"
+                    android:textSize="14sp"
+                    android:focusable="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/bullet_separator"
+                    android:textColor="@color/text_on_surface_variant"
+                    android:textSize="14sp"
+                    android:focusable="false" />
+
+                <TextView
+                    android:id="@+id/tvStorage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/f11_placeholder_storage"
+                    android:textColor="@color/text_on_surface_variant"
+                    android:textSize="14sp"
+                    android:focusable="false" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Top-Right: Exactly two tools: Refresh and Settings -->
+        <LinearLayout
+            android:id="@+id/toolsContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:focusable="false">
+
+            <TextView
+                android:id="@+id/btnRefresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_tool_pill"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                android:text="@string/tool_refresh"
+                android:textColor="@color/text_on_surface"
+                android:textSize="16sp"
+                android:focusable="false" />
+
+            <TextView
+                android:id="@+id/btnSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/bg_tool_pill"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                android:text="@string/tool_settings"
+                android:textColor="@color/text_on_surface"
+                android:textSize="16sp"
+                android:focusable="false" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Bottom Center: Horizontal Home App Row (0..3 H + MoreApps) -->
+    <LinearLayout
+        android:id="@+id/homeAppRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="40dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:focusable="false">
+
+        <!-- 1. YouTube App Card (visible only if in H) -->
+        <FrameLayout
+            android:id="@+id/cardYoutube"
+            android:layout_width="@dimen/app_card_size"
+            android:layout_height="@dimen/app_card_size"
+            android:layout_marginEnd="@dimen/gutter_home_row"
+            android:background="@drawable/bg_app_card"
+            android:visibility="gone"
+            android:focusable="false">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/app_name_youtube"
+                android:textColor="@color/text_on_surface"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:focusable="false" />
+        </FrameLayout>
+
+        <!-- 2. Netflix App Card (visible only if in H) -->
+        <FrameLayout
+            android:id="@+id/cardNetflix"
+            android:layout_width="@dimen/app_card_size"
+            android:layout_height="@dimen/app_card_size"
+            android:layout_marginEnd="@dimen/gutter_home_row"
+            android:background="@drawable/bg_app_card"
+            android:visibility="gone"
+            android:focusable="false">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/app_name_netflix"
+                android:textColor="@color/text_on_surface"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:focusable="false" />
+        </FrameLayout>
+
+        <!-- 3. Disney+ App Card (visible only if in H) -->
+        <FrameLayout
+            android:id="@+id/cardDisneyPlus"
+            android:layout_width="@dimen/app_card_size"
+            android:layout_height="@dimen/app_card_size"
+            android:layout_marginEnd="@dimen/gutter_home_row"
+            android:background="@drawable/bg_app_card"
+            android:visibility="gone"
+            android:focusable="false">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/app_name_disney_plus"
+                android:textColor="@color/text_on_surface"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:focusable="false" />
+        </FrameLayout>
+
+        <!-- 4. More Apps Card (Always present, fixed order at the end of row) -->
+        <FrameLayout
+            android:id="@+id/cardMoreApps"
+            android:layout_width="@dimen/app_card_size"
+            android:layout_height="@dimen/app_card_size"
+            android:background="@drawable/bg_app_card"
+            android:visibility="visible"
+            android:focusable="false">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/more_apps"
+                android:textColor="@color/text_on_surface"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:focusable="false" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- Right Overlay: Drawer Overlay Container (Default GONE and non-focusable) -->
+    <FrameLayout
+        android:id="@+id/drawerOverlayContainer"
+        android:layout_width="@dimen/drawer_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="#E610131A"
+        android:visibility="gone"
+        android:focusable="false"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/drawerClose"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_tool_pill"
+            android:gravity="center"
+            android:text="@string/drawer_close"
+            android:textColor="@color/text_on_surface"
+            android:textSize="16sp"
+            android:focusable="false" />
+    </FrameLayout>
 </FrameLayout>
