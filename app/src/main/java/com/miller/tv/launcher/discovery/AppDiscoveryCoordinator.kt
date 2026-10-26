@@ -12,7 +12,8 @@ class AppDiscoveryCoordinator(
     private val scanner: TvAppScanner,
     private val launcher: AppLauncher,
     private val stateMachine: HomeFocusStateMachine,
-    private val viewBinder: HomeFocusViewBinder? = null
+    private val viewBinder: HomeFocusViewBinder? = null,
+    private val onSnapshotLoadedCallback: ((AppSnapshot) -> Unit)? = null
 ) {
     private var latestSnapshotId: Long = 0L
     private var isRefreshing: Boolean = false
@@ -76,6 +77,7 @@ class AppDiscoveryCoordinator(
 
         // Sync view binder
         viewBinder?.syncState(stateMachine.state)
+        onSnapshotLoadedCallback?.invoke(snapshot)
         return true
     }
 

@@ -55,7 +55,15 @@ class MainActivity : Activity() {
             scanner = scanner,
             launcher = launcher,
             stateMachine = stateMachine,
-            viewBinder = binder
+            viewBinder = binder,
+            onSnapshotLoadedCallback = { snapshot ->
+                for (app in (snapshot.hApps + snapshot.oApps)) {
+                    try {
+                        val icon = packageManager.getApplicationIcon(app.packageName)
+                        binder.target.bindAppIcon(app.componentKey, icon)
+                    } catch (_: Exception) {}
+                }
+            }
         )
 
         // 2. F11 Device Information Providers

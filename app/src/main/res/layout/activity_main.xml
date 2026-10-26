@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_surface"
+    android:background="@drawable/bg_celestial_gradient"
     android:paddingLeft="@dimen/margin_safe_x"
     android:paddingTop="@dimen/margin_safe_y"
     android:paddingRight="@dimen/margin_safe_x"

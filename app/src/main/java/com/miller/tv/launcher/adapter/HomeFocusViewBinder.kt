@@ -1,7 +1,9 @@
 package com.miller.tv.launcher.adapter
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import com.miller.tv.launcher.R
 import com.miller.tv.launcher.databinding.ActivityMainBinding
@@ -53,6 +55,7 @@ interface HomeLauncherViewTarget {
 
     fun bindDrawerApps(apps: List<DrawerAppItemUiState>) {}
     fun updateDeviceInfo(snapshot: DeviceInfoSnapshot) {}
+    fun bindAppIcon(componentKey: String, icon: Drawable?) {}
 }
 
 /**
@@ -61,6 +64,8 @@ interface HomeLauncherViewTarget {
 class BindingHomeLauncherViewTarget(
     private val binding: ActivityMainBinding
 ) : HomeLauncherViewTarget {
+
+    private val appIcons = mutableMapOf<String, Drawable>()
 
     override var isRefreshSelected: Boolean
         get() = binding.btnRefresh.isSelected
@@ -214,6 +219,26 @@ class BindingHomeLauncherViewTarget(
             if (tvName != null) {
                 tvName.text = if (appState.displayName.isNotEmpty()) appState.displayName else appState.componentKey
             }
+
+            val ivIcon = view.findViewById<ImageView>(R.id.ivDrawerItemIcon)
+            if (ivIcon != null) {
+                val iconDrawable = appIcons[appState.componentKey]
+                if (iconDrawable != null) {
+                    ivIcon.setImageDrawable(iconDrawable)
+                    ivIcon.visibility = View.VISIBLE
+                } else {
+                    ivIcon.setImageDrawable(null)
+                    ivIcon.visibility = View.GONE
+                }
+            }
+        }
+    }
+
+    override fun bindAppIcon(componentKey: String, icon: Drawable?) {
+        if (icon != null) {
+            appIcons[componentKey] = icon
+        } else {
+            appIcons.remove(componentKey)
         }
     }
 
