@@ -236,25 +236,54 @@
     </LinearLayout>
 
     <!-- Right Overlay: Drawer Overlay Container (Default GONE and non-focusable) -->
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/drawerOverlayContainer"
         android:layout_width="@dimen/drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:background="#E610131A"
+        android:orientation="vertical"
         android:visibility="gone"
         android:focusable="false"
         android:padding="24dp">
 
         <TextView
+            android:id="@+id/tvDrawerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/more_apps"
+            android:textColor="@color/text_on_surface"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:focusable="false" />
+
+        <TextView
             android:id="@+id/drawerClose"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/bg_tool_pill"
             android:gravity="center"
             android:text="@string/drawer_close"
             android:textColor="@color/text_on_surface"
             android:textSize="16sp"
             android:focusable="false" />
-    </FrameLayout>
+
+        <ScrollView
+            android:id="@+id/drawerScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="none"
+            android:focusable="false">
+
+            <LinearLayout
+                android:id="@+id/drawerAppList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:focusable="false" />
+        </ScrollView>
+    </LinearLayout>
 </FrameLayout>

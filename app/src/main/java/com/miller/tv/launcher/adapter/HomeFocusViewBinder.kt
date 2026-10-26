@@ -1,10 +1,23 @@
 package com.miller.tv.launcher.adapter
 
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
+import com.miller.tv.launcher.R
 import com.miller.tv.launcher.databinding.ActivityMainBinding
 import com.miller.tv.launcher.focus.DesignatedService
 import com.miller.tv.launcher.focus.FocusNode
 import com.miller.tv.launcher.focus.HomeFocusState
+
+/**
+ * Representation of an individual O App item in the Drawer overlay.
+ */
+data class DrawerAppItemUiState(
+    val componentKey: String,
+    val displayName: String = "",
+    val isSelected: Boolean = false,
+    val scale: Float = 1.0f
+)
 
 /**
  * Abstraction for Home Launcher UI view properties to allow decoupled, deterministic verification.
@@ -35,6 +48,8 @@ interface HomeLauncherViewTarget {
     var isDrawerVisible: Boolean
     var isDrawerCloseSelected: Boolean
     var drawerCloseScale: Float
+
+    fun bindDrawerApps(apps: List<DrawerAppItemUiState>) {}
 }
 
 /**
@@ -169,6 +184,35 @@ class BindingHomeLauncherViewTarget(
             binding.drawerClose.scaleX = value
             binding.drawerClose.scaleY = value
         }
+
+    override fun bindDrawerApps(apps: List<DrawerAppItemUiState>) {
+        val container = binding.drawerAppList
+        val context = container.context ?: return
+        val inflater = LayoutInflater.from(context)
+
+        // Ensure container has exactly the same number of views
+        while (container.childCount > apps.size) {
+            container.removeViewAt(container.childCount - 1)
+        }
+        while (container.childCount < apps.size) {
+            val itemView = inflater.inflate(R.layout.item_drawer_app, container, false)
+            container.addView(itemView)
+        }
+
+        for (i in apps.indices) {
+            val appState = apps[i]
+            val view = container.getChildAt(i)
+            view.isFocusable = false
+            view.isSelected = appState.isSelected
+            view.scaleX = appState.scale
+            view.scaleY = appState.scale
+
+            val tvName = view.findViewById<TextView>(R.id.tvDrawerItemName)
+            if (tvName != null) {
+                tvName.text = if (appState.displayName.isNotEmpty()) appState.displayName else appState.componentKey
+            }
+        }
+    }
 }
 
 /**
@@ -221,6 +265,22 @@ class HomeFocusViewBinder(
     }
 
     /**
+     * Synchronizes O App items inside the Drawer overlay with focus highlights.
+     */
+    fun bindDrawerApps(drawerApps: List<FocusNode.Drawer.App>, currentFocus: FocusNode) {
+        val items = drawerApps.map { app ->
+            val isSelected = currentFocus == app
+            DrawerAppItemUiState(
+                componentKey = app.componentKey,
+                displayName = app.componentKey.substringAfterLast('/'),
+                isSelected = isSelected,
+                scale = if (isSelected) FOCUSED_SCALE else DEFAULT_SCALE
+            )
+        }
+        target.bindDrawerApps(items)
+    }
+
+    /**
      * Applies visual focus styling based on the current domain FocusNode.
      */
     fun applyFocus(focus: FocusNode) {
@@ -266,6 +326,7 @@ class HomeFocusViewBinder(
     fun syncState(state: HomeFocusState) {
         bindHomeApps(state.hApps)
         updateDrawerVisibility(state.isDrawerOpen)
+        bindDrawerApps(state.drawerApps, state.currentFocus)
         applyFocus(state.currentFocus)
     }
 }
