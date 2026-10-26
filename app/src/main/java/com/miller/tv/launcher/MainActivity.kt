@@ -6,6 +6,11 @@ import android.view.KeyEvent
 import com.miller.tv.launcher.adapter.HomeFocusController
 import com.miller.tv.launcher.adapter.HomeFocusViewBinder
 import com.miller.tv.launcher.databinding.ActivityMainBinding
+import com.miller.tv.launcher.deviceinfo.AndroidHdmiProvider
+import com.miller.tv.launcher.deviceinfo.AndroidNetworkProvider
+import com.miller.tv.launcher.deviceinfo.AndroidStorageProvider
+import com.miller.tv.launcher.deviceinfo.AndroidTimeProvider
+import com.miller.tv.launcher.deviceinfo.DeviceInfoCoordinator
 import com.miller.tv.launcher.discovery.AndroidTvAppScanner
 import com.miller.tv.launcher.discovery.AppDiscoveryCoordinator
 import com.miller.tv.launcher.discovery.ContextAppLauncher
@@ -13,7 +18,7 @@ import com.miller.tv.launcher.discovery.TvAppCategorizer
 import com.miller.tv.launcher.focus.HomeFocusStateMachine
 
 /**
- * Main activity implementing Home A UI, Focus Adapter, App Discovery and Launch Integration.
+ * Main activity implementing Home A UI, Focus Adapter, App Discovery, and F11 Device Telemetry.
  */
 class MainActivity : Activity() {
 
@@ -26,6 +31,9 @@ class MainActivity : Activity() {
     lateinit var discoveryCoordinator: AppDiscoveryCoordinator
         internal set
 
+    lateinit var deviceInfoCoordinator: DeviceInfoCoordinator
+        internal set
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -34,6 +42,7 @@ class MainActivity : Activity() {
         val binder = HomeFocusViewBinder(binding)
         val stateMachine = HomeFocusStateMachine()
 
+        // 1. App Discovery & Launch
         val categorizer = TvAppCategorizer(ownPackageName = packageName)
         val scanner = AndroidTvAppScanner(
             packageManager = packageManager,
@@ -49,6 +58,17 @@ class MainActivity : Activity() {
             viewBinder = binder
         )
 
+        // 2. F11 Device Information Providers
+        deviceInfoCoordinator = DeviceInfoCoordinator(
+            timeProvider = AndroidTimeProvider(this),
+            networkProvider = AndroidNetworkProvider(this),
+            hdmiProvider = AndroidHdmiProvider(),
+            storageProvider = AndroidStorageProvider(filesDir),
+            target = binder.target,
+            uiDispatcher = { runOnUiThread(it) }
+        )
+
+        // 3. Focus Controller
         focusController = HomeFocusController(
             stateMachine = stateMachine,
             viewBinder = binder,
@@ -56,8 +76,22 @@ class MainActivity : Activity() {
             onExitLauncher = { finish() }
         )
 
-        // Perform initial discovery scan on startup
+        // Initial discovery scan on startup
         discoveryCoordinator.refresh()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (::deviceInfoCoordinator.isInitialized) {
+            deviceInfoCoordinator.onResume()
+        }
+    }
+
+    override fun onPause() {
+        if (::deviceInfoCoordinator.isInitialized) {
+            deviceInfoCoordinator.onPause()
+        }
+        super.onPause()
     }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
@@ -70,6 +104,9 @@ class MainActivity : Activity() {
     override fun onDestroy() {
         if (::discoveryCoordinator.isInitialized) {
             discoveryCoordinator.destroy()
+        }
+        if (::deviceInfoCoordinator.isInitialized) {
+            deviceInfoCoordinator.destroy()
         }
         super.onDestroy()
     }

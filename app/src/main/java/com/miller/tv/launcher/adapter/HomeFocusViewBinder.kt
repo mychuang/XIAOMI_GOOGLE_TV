@@ -5,6 +5,8 @@ import android.view.View
 import android.widget.TextView
 import com.miller.tv.launcher.R
 import com.miller.tv.launcher.databinding.ActivityMainBinding
+import com.miller.tv.launcher.deviceinfo.DeviceInfoSnapshot
+import com.miller.tv.launcher.deviceinfo.InfoState
 import com.miller.tv.launcher.focus.DesignatedService
 import com.miller.tv.launcher.focus.FocusNode
 import com.miller.tv.launcher.focus.HomeFocusState
@@ -50,6 +52,7 @@ interface HomeLauncherViewTarget {
     var drawerCloseScale: Float
 
     fun bindDrawerApps(apps: List<DrawerAppItemUiState>) {}
+    fun updateDeviceInfo(snapshot: DeviceInfoSnapshot) {}
 }
 
 /**
@@ -213,6 +216,40 @@ class BindingHomeLauncherViewTarget(
             }
         }
     }
+
+    override fun updateDeviceInfo(snapshot: DeviceInfoSnapshot) {
+        binding.tvTime.text = when (val s = snapshot.timeState) {
+            is InfoState.Available -> s.data
+            is InfoState.Unknown -> "時間未知"
+            is InfoState.Unavailable -> s.displayMessage
+        }
+
+        binding.tvDate.text = when (val s = snapshot.dateState) {
+            is InfoState.Available -> s.data
+            is InfoState.Unknown -> "日期未知"
+            is InfoState.Unavailable -> s.displayMessage
+        }
+
+        binding.tvNetwork.text = when (val s = snapshot.networkState) {
+            is InfoState.Available -> s.data.displayString
+            is InfoState.Unknown -> "網路狀態: 狀態未知"
+            is InfoState.Unavailable -> "網路狀態: ${s.displayMessage}"
+        }
+
+        binding.tvHdmi.text = when (val s = snapshot.hdmiState) {
+            is InfoState.Available -> {
+                if (s.data.ports.isEmpty()) "HDMI: 無連接埠" else "HDMI: " + s.data.ports.joinToString { "${it.portId} (${if (it.isConnected) "已連線" else "未連線"})" }
+            }
+            is InfoState.Unknown -> "HDMI: 狀態未知"
+            is InfoState.Unavailable -> "HDMI: ${s.displayMessage}"
+        }
+
+        binding.tvStorage.text = when (val s = snapshot.storageState) {
+            is InfoState.Available -> "儲存空間: ${s.data.displayString}"
+            is InfoState.Unknown -> "儲存空間: 狀態未知"
+            is InfoState.Unavailable -> "儲存空間: ${s.displayMessage}"
+        }
+    }
 }
 
 /**
@@ -224,7 +261,7 @@ class BindingHomeLauncherViewTarget(
  * - Drawer container is GONE and non-focusable when closed
  */
 class HomeFocusViewBinder(
-    private val target: HomeLauncherViewTarget
+    val target: HomeLauncherViewTarget
 ) {
     constructor(binding: ActivityMainBinding) : this(BindingHomeLauncherViewTarget(binding))
 
